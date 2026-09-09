@@ -13,7 +13,7 @@ function Card({ p }) {
         <h3 className="font-display text-xl text-ink">{p.name}</h3>
         <Tier tier={p.safety_tier} />
       </div>
-      <p className="label !tracking-[0.16em] text-muted">{p.category}{p.neighborhood ? ` · ${p.neighborhood}` : ""}</p>
+      <p className="label !tracking-[0.16em] text-grey-2">{p.category}{p.neighborhood ? ` · ${p.neighborhood}` : ""}</p>
       <p className="text-sm text-grey-1 leading-relaxed">{p.highlights}</p>
       {p.safety_notes && <p className="text-[12.5px] text-grey-2 leading-relaxed border-l-2 border-line pl-3 mt-1">{p.safety_notes}</p>}
     </li>
@@ -50,7 +50,7 @@ export function ClubPage({ onNavigate, onReserve }) {
         <div className="mt-16">
           <Kicker>Also on the circuit · not yet verified by our team</Kicker>
           <ul className="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">{rest.map((p) => <Card key={p.id} p={p} />)}</ul>
-          <p className="mt-6 text-[12px] text-muted max-w-2xl">Verified / caution / unverified come from published guides and travellers' reports; Vardas staff visit and re-rate the circuit monthly. Tell us if something has changed.</p>
+          <p className="mt-6 text-[12px] text-grey-2 max-w-2xl">Verified / caution / unverified come from published guides and travellers' reports; Vardas staff visit and re-rate the circuit monthly. Tell us if something has changed.</p>
         </div>
       </section>
     </div>

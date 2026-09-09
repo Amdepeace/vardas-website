@@ -19,7 +19,7 @@ export function HirePage({ onNavigate, onToast }) {
               <div className="p-5">
                 <div className="flex justify-between items-baseline"><h3 className="font-display text-xl text-ink">{z.title}</h3><Price>up to {z.capacity}</Price></div>
                 <p className="text-sm text-grey-1 mt-2 leading-relaxed">{z.blurb}</p>
-                <p className="mt-3 label !tracking-[0.16em] text-muted">Minimum · published on request-to-quote</p>
+                <p className="mt-3 label !tracking-[0.16em] text-grey-2">Minimum · published on request-to-quote</p>
                 <button onClick={() => onNavigate("tours")} className="mt-3 label !tracking-[0.2em] text-red hover:text-ink">Walk through in 360° →</button>
               </div>
             </div>

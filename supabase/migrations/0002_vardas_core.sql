@@ -1,5 +1,5 @@
 -- Vardas core schema — migration 0002
--- Rebrand of the Bellvue codebase for Vardas Bar & Restaurant / Nightclub,
+-- Core schema for Vardas Bar & Restaurant / Nightclub,
 -- 5th floor, Getu Commercial Building, Africa Avenue, Bole.
 -- Backs: published menu prices, reservations, trust layer, events & private
 -- hire, artist bookings, Getting Here / Bole guide, ride-home partners,

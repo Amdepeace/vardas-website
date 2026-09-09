@@ -12,7 +12,7 @@ const FILTERS = [
 ];
 
 const FIELD_CLASS =
-  "w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-warm-gold focus:border-warm-gold";
+  "w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-red focus:border-red";
 
 export function GuestsPage() {
   const [guests, setGuests] = useState([]);
@@ -88,11 +88,11 @@ export function GuestsPage() {
       <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
         <div>
           <p className="text-label-caps text-outline uppercase mb-2">Directory</p>
-          <h2 className="playfair text-headline-xl text-deep-navy">Guests</h2>
+          <h2 className="playfair text-headline-xl text-ink">Guests</h2>
         </div>
         <button
           onClick={() => setShowNew(true)}
-          className="bg-warm-gold text-white text-cta-label uppercase px-5 py-2.5 rounded hover:bg-secondary-fixed-dim flex items-center gap-2"
+          className="bg-red text-white text-cta-label uppercase px-5 py-2.5 rounded hover:bg-secondary-fixed-dim flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           New guest
@@ -113,7 +113,7 @@ export function GuestsPage() {
             placeholder="Search by name, email, or phone…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-surface-container-low border border-outline-variant rounded-full pl-10 pr-4 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-warm-gold"
+            className="w-full bg-surface-container-low border border-outline-variant rounded-full pl-10 pr-4 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-red"
           />
           <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">
             search
@@ -126,7 +126,7 @@ export function GuestsPage() {
               onClick={() => setFilter(f.id)}
               className={`text-cta-label uppercase px-4 py-2 rounded transition-colors ${
                 filter === f.id
-                  ? "bg-deep-navy text-white"
+                  ? "bg-ink text-white"
                   : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
               }`}
             >
@@ -188,7 +188,7 @@ export function GuestsPage() {
                     <td className="px-4 py-3 text-sm text-on-surface">
                       <span className="font-medium">{g.full_name}</span>
                       {g.is_vip && (
-                        <span className="ml-2 inline-block text-[10px] uppercase tracking-widest text-warm-gold">
+                        <span className="ml-2 inline-block text-[10px] uppercase tracking-widest text-red">
                           VIP
                         </span>
                       )}
@@ -280,7 +280,7 @@ function GuestDrawer({ guest, onClose, onUpdate }) {
                 setEditing(false);
                 setForm(guest);
               }}
-              className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-deep-navy"
+              className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-ink"
             >
               Cancel
             </button>
@@ -288,7 +288,7 @@ function GuestDrawer({ guest, onClose, onUpdate }) {
               form="edit-guest-form"
               type="submit"
               disabled={submitting}
-              className="text-cta-label uppercase px-4 py-2 bg-warm-gold text-white rounded hover:bg-secondary-fixed-dim disabled:opacity-50"
+              className="text-cta-label uppercase px-4 py-2 bg-red text-white rounded hover:bg-secondary-fixed-dim disabled:opacity-50"
             >
               {submitting ? "Saving…" : "Save"}
             </button>
@@ -297,13 +297,13 @@ function GuestDrawer({ guest, onClose, onUpdate }) {
           <>
             <button
               onClick={onClose}
-              className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-deep-navy"
+              className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-ink"
             >
               Close
             </button>
             <button
               onClick={() => setEditing(true)}
-              className="text-cta-label uppercase px-4 py-2 bg-warm-gold text-white rounded hover:bg-secondary-fixed-dim"
+              className="text-cta-label uppercase px-4 py-2 bg-red text-white rounded hover:bg-secondary-fixed-dim"
             >
               Edit
             </button>
@@ -370,7 +370,7 @@ function GuestDrawer({ guest, onClose, onUpdate }) {
               type="checkbox"
               checked={!!form.is_vip}
               onChange={(e) => setForm({ ...form, is_vip: e.target.checked })}
-              className="w-4 h-4 accent-warm-gold"
+              className="w-4 h-4 accent-red"
             />
             <span className="text-on-surface text-sm">VIP guest</span>
           </label>
@@ -386,7 +386,7 @@ function GuestDrawer({ guest, onClose, onUpdate }) {
       ) : (
         <div className="space-y-6">
           {guest.is_vip && (
-            <span className="inline-block text-[10px] uppercase tracking-widest text-warm-gold border border-warm-gold rounded px-2 py-1">
+            <span className="inline-block text-[10px] uppercase tracking-widest text-red border border-red rounded px-2 py-1">
               VIP guest
             </span>
           )}
@@ -488,7 +488,7 @@ function NewGuestDrawer({ onClose, onCreated }) {
           <button
             type="button"
             onClick={onClose}
-            className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-deep-navy"
+            className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-ink"
           >
             Cancel
           </button>
@@ -496,7 +496,7 @@ function NewGuestDrawer({ onClose, onCreated }) {
             form="new-guest-form"
             type="submit"
             disabled={submitting}
-            className="text-cta-label uppercase px-4 py-2 bg-warm-gold text-white rounded hover:bg-secondary-fixed-dim disabled:opacity-50"
+            className="text-cta-label uppercase px-4 py-2 bg-red text-white rounded hover:bg-secondary-fixed-dim disabled:opacity-50"
           >
             {submitting ? "Creating…" : "Create guest"}
           </button>
@@ -562,7 +562,7 @@ function NewGuestDrawer({ onClose, onCreated }) {
             type="checkbox"
             checked={form.is_vip}
             onChange={(e) => setForm({ ...form, is_vip: e.target.checked })}
-            className="w-4 h-4 accent-warm-gold"
+            className="w-4 h-4 accent-red"
           />
           <span className="text-on-surface text-sm">VIP guest</span>
         </label>

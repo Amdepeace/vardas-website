@@ -21,7 +21,7 @@ export function Drawer({ open, onClose, eyebrow, title, actions, children }) {
     <div className="fixed inset-0 z-[90]">
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-deep-navy/30 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-ink/30 backdrop-blur-[2px]"
       />
       <aside className="absolute right-0 top-0 h-full w-full sm:w-[480px] bg-surface-container-lowest border-l border-outline-variant shadow-2xl flex flex-col">
         <div className="flex items-center justify-between px-6 py-5 border-b border-outline-variant">
@@ -31,12 +31,12 @@ export function Drawer({ open, onClose, eyebrow, title, actions, children }) {
                 {eyebrow}
               </p>
             )}
-            <h2 className="playfair text-2xl text-deep-navy">{title}</h2>
+            <h2 className="playfair text-2xl text-ink">{title}</h2>
           </div>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="text-outline hover:text-deep-navy"
+            className="text-outline hover:text-ink"
           >
             <span className="material-symbols-outlined">close</span>
           </button>

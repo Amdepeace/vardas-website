@@ -28,35 +28,35 @@ export function HostWidget() {
   return (
     <Fragment>
       <button onClick={() => setOpen((o) => !o)} aria-label={open ? "Close host" : "Ask the host"}
-        className={`fixed bottom-6 right-6 z-[70] w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ${open ? "bg-night text-paper rotate-90" : "bg-brass text-night hover:scale-105"}`}>
+        className={`fixed bottom-6 right-6 z-[70] w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ${open ? "bg-ink text-paper rotate-90" : "bg-red text-ink hover:scale-105"}`}>
         <span className="material-symbols-outlined">{open ? "close" : "chat_bubble"}</span>
       </button>
       <div className={`fixed bottom-24 right-6 z-[69] w-[360px] max-w-[calc(100vw-3rem)] h-[520px] max-h-[calc(100vh-8rem)] bg-paper border border-line shadow-2xl flex flex-col origin-bottom-right transition-all duration-300 ${open ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}>
-        <div className="px-5 py-4 border-b border-line bg-night text-paper flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-brass/20 flex items-center justify-center"><span className="font-display text-brass-soft text-lg">S</span></div>
+        <div className="px-5 py-4 border-b border-line bg-ink text-paper flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-red/20 flex items-center justify-center"><span className="font-display text-red-soft text-lg">S</span></div>
           <div className="flex-1">
             <p className="font-display text-base tracking-[0.18em]">HOST</p>
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/60 flex items-center gap-1.5">
-              <span className={`w-1.5 h-1.5 rounded-full ${backendReady ? "bg-terrace animate-pulse" : "bg-smoke"}`} /> {backendReady ? "Online · Selam" : "Preview · Selam"}
+              <span className={`w-1.5 h-1.5 rounded-full ${backendReady ? "bg-ink animate-pulse" : "bg-grey-3"}`} /> {backendReady ? "Online · Selam" : "Preview · Selam"}
             </p>
           </div>
         </div>
         <div ref={scroller} className="flex-1 overflow-y-auto p-4 space-y-3 no-bar">
           {msgs.map((m, i) => (
             <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${m.role === "user" ? "bg-night text-paper rounded-2xl rounded-br-sm" : "bg-paper-2 border border-line text-ink rounded-2xl rounded-bl-sm"}`}>{m.content}</div>
+              <div className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${m.role === "user" ? "bg-ink text-paper rounded-2xl rounded-br-sm" : "bg-paper-2 border border-line text-ink rounded-2xl rounded-bl-sm"}`}>{m.content}</div>
             </div>
           ))}
-          {busy && <div className="flex justify-start"><div className="bg-paper-2 border border-line rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1">{[0, 150, 300].map((d) => <span key={d} className="w-1.5 h-1.5 rounded-full bg-brass animate-bounce" style={{ animationDelay: `${d}ms` }} />)}</div></div>}
+          {busy && <div className="flex justify-start"><div className="bg-paper-2 border border-line rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1">{[0, 150, 300].map((d) => <span key={d} className="w-1.5 h-1.5 rounded-full bg-red animate-bounce" style={{ animationDelay: `${d}ms` }} />)}</div></div>}
         </div>
         {msgs.length <= 1 && !busy && (
           <div className="px-4 pb-2 flex flex-wrap gap-1.5">
-            {SUGGESTIONS.map((s) => <button key={s} onClick={() => send(s)} className="text-[11px] text-ink/80 bg-paper-2 border border-line rounded-full px-3 py-1.5 hover:border-brass hover:text-brass transition-colors">{s}</button>)}
+            {SUGGESTIONS.map((s) => <button key={s} onClick={() => send(s)} className="text-[11px] text-ink/80 bg-paper-2 border border-line rounded-full px-3 py-1.5 hover:border-red hover:text-red transition-colors">{s}</button>)}
           </div>
         )}
         <form onSubmit={(e) => { e.preventDefault(); send(draft); }} className="border-t border-line p-3 flex items-center gap-2">
-          <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Ask the host…" disabled={busy} className="flex-1 bg-transparent text-sm focus:outline-none px-2 py-2 placeholder:text-muted" />
-          <button type="submit" disabled={busy || !draft.trim()} className="w-9 h-9 rounded-full bg-brass text-night flex items-center justify-center disabled:opacity-40 hover:bg-night hover:text-paper transition-colors" aria-label="Send">
+          <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Ask the host…" disabled={busy} className="flex-1 bg-transparent text-sm focus:outline-none px-2 py-2 placeholder:text-grey-2" />
+          <button type="submit" disabled={busy || !draft.trim()} className="w-9 h-9 rounded-full bg-red text-ink flex items-center justify-center disabled:opacity-40 hover:bg-ink hover:text-paper transition-colors" aria-label="Send">
             <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
           </button>
         </form>

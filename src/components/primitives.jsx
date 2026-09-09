@@ -15,7 +15,7 @@ export function Logo({ size = "md", inverse = false, className = "" }) {
   const sz = size === "lg" ? "text-base" : size === "sm" ? "text-[0.7rem]" : "text-[0.8rem]";
   return (
     <span className={`inline-flex items-center gap-2 font-semibold ${sz} tracking-[0.18em] uppercase ${inverse ? "text-paper" : "text-ink"} ${className}`}>
-      <span className="red-dot" /> Vardas
+      <span className="red-dot !bg-logo" /> Vardas
     </span>
   );
 }
@@ -121,6 +121,7 @@ export function Placeholder({ label, caption, aspect = "4/3", tone = "light", cl
       <img src={finalSrc} alt={label || ""} loading="lazy"
         className={`absolute inset-0 w-full h-full object-cover ${mono ? "mono-img" : ""} ${tone === "dark" ? "opacity-75" : ""}`}
         onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.parentElement.classList.add(tone === "dark" ? "stripe-bg-dark" : "stripe-bg"); }} />
+      {tone === "dark" && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent 55%)" }} />}
       {caption && <div className="absolute bottom-3 left-3 label text-paper/50 !tracking-[0.25em] !text-[0.55rem]">{caption}</div>}
       {children}
     </div>

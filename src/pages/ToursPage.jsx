@@ -35,7 +35,7 @@ export function ToursPage({ onReserve }) {
               <Kicker>{z.smoking ? "Smoking · marked areas" : "Smoke-free"}</Kicker>
               <h2 className="font-display text-3xl text-ink mt-3">{z.title}</h2>
               <p className="text-sm text-grey-1 mt-3 leading-relaxed">{z.blurb}</p>
-              <p className="label !tracking-[0.16em] text-muted mt-4">Capacity · {z.capacity}</p>
+              <p className="label !tracking-[0.16em] text-grey-2 mt-4">Capacity · {z.capacity}</p>
               <CTA variant="ghost" className="mt-6" onClick={() => onReserve({ zone: z.id })}>Reserve here</CTA>
             </div>
           </div>

@@ -33,9 +33,9 @@ export function AdminLogin() {
 
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-background">
-      <div className="hidden md:flex flex-col justify-between bg-deep-navy text-warm-gold p-12">
+      <div className="hidden md:flex flex-col justify-between bg-ink text-red p-12">
         <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined ms-fill text-warm-gold text-4xl">
+          <span className="material-symbols-outlined ms-fill text-red text-4xl">
             hotel_class
           </span>
           <div>
@@ -45,7 +45,7 @@ export function AdminLogin() {
             </p>
           </div>
         </div>
-        <blockquote className="display text-2xl text-cream/85 leading-relaxed max-w-md">
+        <blockquote className="display text-2xl text-paper/85 leading-relaxed max-w-md">
           "There is an unhurried generosity to the place — the way coffee arrives,
           the way the light moves through the corridor at four o'clock."
         </blockquote>
@@ -56,7 +56,7 @@ export function AdminLogin() {
 
       <div className="flex items-center justify-center p-8">
         <form onSubmit={onSubmit} className="w-full max-w-sm">
-          <h2 className="display text-headline-lg text-deep-navy mb-2">
+          <h2 className="display text-headline-lg text-ink mb-2">
             Sign in
           </h2>
           <p className="text-on-surface-variant text-body-md mb-8">
@@ -73,8 +73,8 @@ export function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
-              className="w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-warm-gold focus:border-warm-gold"
-              placeholder="you@bellevue.com"
+              className="w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-red focus:border-red"
+              placeholder="you@vardas.et"
             />
           </label>
 
@@ -88,7 +88,7 @@ export function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
-              className="w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-warm-gold focus:border-warm-gold"
+              className="w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-red focus:border-red"
               placeholder="••••••••"
             />
           </label>
@@ -102,7 +102,7 @@ export function AdminLogin() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-warm-gold text-white text-cta-label uppercase py-3 rounded hover:bg-secondary-fixed-dim transition-colors disabled:opacity-50"
+            className="w-full bg-red text-white text-cta-label uppercase py-3 rounded hover:bg-secondary-fixed-dim transition-colors disabled:opacity-50"
           >
             {submitting ? "Signing in…" : "Sign in"}
           </button>

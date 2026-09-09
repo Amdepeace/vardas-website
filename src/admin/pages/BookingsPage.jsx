@@ -96,11 +96,11 @@ export function BookingsPage() {
       <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
         <div>
           <p className="text-label-caps text-outline uppercase mb-2">Today</p>
-          <h2 className="playfair text-headline-xl text-deep-navy">Bookings</h2>
+          <h2 className="playfair text-headline-xl text-ink">Bookings</h2>
         </div>
         <button
           onClick={() => setShowNew(true)}
-          className="bg-warm-gold text-white text-cta-label uppercase px-5 py-2.5 rounded hover:bg-secondary-fixed-dim flex items-center gap-2"
+          className="bg-red text-white text-cta-label uppercase px-5 py-2.5 rounded hover:bg-secondary-fixed-dim flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           New booking
@@ -121,7 +121,7 @@ export function BookingsPage() {
             onClick={() => setFilter(f.id)}
             className={`text-cta-label uppercase px-4 py-2 rounded transition-colors ${
               filter === f.id
-                ? "bg-deep-navy text-white"
+                ? "bg-ink text-white"
                 : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
             }`}
           >
@@ -182,7 +182,7 @@ export function BookingsPage() {
                     onClick={() => setSelected(b)}
                     className="border-b border-outline-variant last:border-b-0 hover:bg-surface-container-low cursor-pointer transition-colors"
                   >
-                    <td className="px-4 py-3 font-mono text-sm text-deep-navy">
+                    <td className="px-4 py-3 font-mono text-sm text-ink">
                       {b.ref}
                     </td>
                     <td className="px-4 py-3 text-sm text-on-surface">
@@ -190,7 +190,7 @@ export function BookingsPage() {
                         {b.guests?.full_name || "—"}
                       </span>
                       {b.guests?.is_vip && (
-                        <span className="ml-2 text-[10px] uppercase tracking-widest text-warm-gold">
+                        <span className="ml-2 text-[10px] uppercase tracking-widest text-red">
                           VIP
                         </span>
                       )}
@@ -266,7 +266,7 @@ function BookingDrawer({ booking, onClose, onUpdate }) {
         <>
           <button
             onClick={onClose}
-            className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-deep-navy"
+            className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-ink"
           >
             Close
           </button>
@@ -277,7 +277,7 @@ function BookingDrawer({ booking, onClose, onUpdate }) {
               className={`text-cta-label uppercase px-4 py-2 rounded ${
                 s === "cancelled"
                   ? "border border-outline-variant text-error hover:bg-error-container"
-                  : "bg-warm-gold text-white hover:bg-secondary-fixed-dim"
+                  : "bg-red text-white hover:bg-secondary-fixed-dim"
               }`}
             >
               {TRANSITION_LABEL[s] || s.replace("_", " ")}
@@ -295,7 +295,7 @@ function BookingDrawer({ booking, onClose, onUpdate }) {
           <p className="text-on-surface font-medium">
             {booking.guests?.full_name}
             {booking.guests?.is_vip && (
-              <span className="ml-2 text-[10px] uppercase tracking-widest text-warm-gold">
+              <span className="ml-2 text-[10px] uppercase tracking-widest text-red">
                 VIP
               </span>
             )}
@@ -349,7 +349,7 @@ function BookingDrawer({ booking, onClose, onUpdate }) {
 
         {booking.total_etb && (
           <DrawerSection label="Total">
-            <p className="playfair text-2xl text-deep-navy">
+            <p className="playfair text-2xl text-ink">
               {Number(booking.total_etb).toLocaleString()} ETB
             </p>
           </DrawerSection>
@@ -382,7 +382,7 @@ function BookingDrawer({ booking, onClose, onUpdate }) {
 }
 
 const FIELD_CLASS =
-  "w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-warm-gold focus:border-warm-gold";
+  "w-full bg-surface-container-low border border-outline-variant rounded px-3 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-red focus:border-red";
 
 function NewBookingDrawer({ onClose, onCreated }) {
   const today = new Date().toISOString().slice(0, 10);
@@ -467,7 +467,7 @@ function NewBookingDrawer({ onClose, onCreated }) {
           <button
             type="button"
             onClick={onClose}
-            className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-deep-navy"
+            className="text-cta-label uppercase px-4 py-2 text-on-surface-variant hover:text-ink"
           >
             Cancel
           </button>
@@ -475,7 +475,7 @@ function NewBookingDrawer({ onClose, onCreated }) {
             form="new-booking-form"
             type="submit"
             disabled={submitting}
-            className="text-cta-label uppercase px-4 py-2 bg-warm-gold text-white rounded hover:bg-secondary-fixed-dim disabled:opacity-50"
+            className="text-cta-label uppercase px-4 py-2 bg-red text-white rounded hover:bg-secondary-fixed-dim disabled:opacity-50"
           >
             {submitting ? "Creating…" : "Create booking"}
           </button>

@@ -23,7 +23,7 @@ export function AdminGuard({ children }) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background p-8 text-center">
         <div className="max-w-md">
-          <h1 className="playfair text-headline-lg text-deep-navy mb-3">
+          <h1 className="playfair text-headline-lg text-ink mb-3">
             No staff access
           </h1>
           <p className="text-on-surface-variant text-body-md">

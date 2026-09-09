@@ -45,7 +45,7 @@ export function GettingHerePage({ onReserve }) {
           <div className="border border-line bg-paper-2 p-5">
             <div className="flex items-center justify-between"><Kicker>Bole after dark</Kicker><Tier tier={bole.safety_tier} /></div>
             <p className="mt-3 text-sm text-grey-1 leading-relaxed">{bole.safety_notes}</p>
-            <p className="mt-2 text-[11px] text-muted">Source: published safety guide · rating {bole.rating}/5</p>
+            <p className="mt-2 text-[11px] text-grey-2">Source: published safety guide · rating {bole.rating}/5</p>
           </div>
           <div className="border border-ink bg-ink text-paper p-6">
             <Kicker inverse>Going home</Kicker>
@@ -62,13 +62,13 @@ export function GettingHerePage({ onReserve }) {
             {building.map((p) => (
               <li key={p.id} className="border border-line bg-paper p-5">
                 <h3 className="font-display text-lg text-ink">{p.name}</h3>
-                <p className="label !tracking-[0.16em] text-muted mt-1">{p.category}</p>
+                <p className="label !tracking-[0.16em] text-grey-2 mt-1">{p.category}</p>
                 <p className="text-sm text-grey-1 mt-2 leading-relaxed">{p.highlights}</p>
               </li>
             ))}
             <li className="border border-red bg-ink text-paper p-5"><h3 className="font-display text-lg">Vardas</h3><p className="label !tracking-[0.16em] text-red-soft mt-1">5th floor · terrace</p><p className="text-sm text-paper/70 mt-2">You're looking for us.</p></li>
           </ul>
-          <div className="mt-10 flex flex-wrap gap-6 label !tracking-[0.2em] text-muted">
+          <div className="mt-10 flex flex-wrap gap-6 label !tracking-[0.2em] text-grey-2">
             {VENUE.emergency.map((e) => <span key={e.label}>{e.label} · <span className="text-ink">{e.number}</span></span>)}
           </div>
         </div>

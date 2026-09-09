@@ -1,4 +1,4 @@
--- Bellevue admin schema — initial migration
+-- Staff auth schema — initial migration (staff_roles, is_staff()); hotel tables here are retired in 0004.
 -- Run this in Supabase SQL editor (or `supabase db push` if using the CLI).
 -- Assumes auth.users already exists (managed by Supabase Auth).
 

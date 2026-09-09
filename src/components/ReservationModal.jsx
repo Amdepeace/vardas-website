@@ -49,11 +49,11 @@ export function ReservationModal({ open, onClose, prefill, onConfirm }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center" role="dialog" aria-modal="true" aria-label="Reserve a table">
-      <div className="absolute inset-0 bg-night/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-ink/70 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full md:max-w-xl bg-paper text-ink border border-line shadow-2xl max-h-[92vh] overflow-y-auto">
-        <div className="px-6 md:px-8 py-5 border-b border-line flex items-start justify-between bg-night text-paper">
+        <div className="px-6 md:px-8 py-5 border-b border-line flex items-start justify-between bg-ink text-paper">
           <div>
-            <Kicker className="!text-brass-soft">Reserve · 5th floor</Kicker>
+            <Kicker className="!text-red-soft">Reserve · 5th floor</Kicker>
             <h2 className="font-display text-2xl mt-2">A table on your terms</h2>
           </div>
           <button onClick={onClose} aria-label="Close" className="text-paper/70 hover:text-paper"><span className="material-symbols-outlined">close</span></button>
@@ -61,8 +61,8 @@ export function ReservationModal({ open, onClose, prefill, onConfirm }) {
 
         {done ? (
           <div className="px-6 md:px-8 py-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-brass">Reference {done}</p>
-            <h3 className="font-display text-3xl mt-3 text-night">See you on the fifth floor.</h3>
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-red">Reference {done}</p>
+            <h3 className="font-display text-3xl mt-3 text-ink">See you on the fifth floor.</h3>
             <p className="mt-4 text-sm text-ink/75 leading-relaxed">
               {backendReady ? "We'll confirm on WhatsApp shortly." : "Preview mode — no reservation was sent. Connect Supabase to go live."}
               {" "}Remember: every price is published, water is free, and we're at 2,355 m — alcohol works harder here.
@@ -91,11 +91,11 @@ export function ReservationModal({ open, onClose, prefill, onConfirm }) {
             <Field label="Notes"><input className="field-line" placeholder="Birthday, allergies, quiet table…" value={data.notes} onChange={set("notes")} /></Field>
             <label className="sm:col-span-2 flex items-start gap-3 text-sm text-ink/80 cursor-pointer">
               <input type="checkbox" checked={data.ride} onChange={set("ride")} className="mt-1 accent-[#C8A452]" />
-              <span><b className="text-night">Arrange a ride home.</b> A vetted driver or partner, booked by us — you confirm the time on the night.</span>
+              <span><b className="text-ink">Arrange a ride home.</b> A vetted driver or partner, booked by us — you confirm the time on the night.</span>
             </label>
-            {errors.form && <p className="sm:col-span-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ember">⚠ {errors.form}</p>}
+            {errors.form && <p className="sm:col-span-2 font-mono text-[10px] uppercase tracking-[0.18em] text-red">⚠ {errors.form}</p>}
             <div className="sm:col-span-2 flex flex-wrap items-center justify-between gap-4 pt-2">
-              <p className="text-[12px] text-muted max-w-xs">No deposit. No minimum unless you choose a zone that shows one. Prices on the menu are the prices you pay.</p>
+              <p className="text-[12px] text-grey-2 max-w-xs">No deposit. No minimum unless you choose a zone that shows one. Prices on the menu are the prices you pay.</p>
               <CTA type="submit" variant="brass" disabled={busy}>{busy ? "Sending…" : "Reserve →"}</CTA>
             </div>
           </form>
@@ -114,8 +114,8 @@ export function Toast({ message, onDone }) {
   if (!message) return null;
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[110] toast-in">
-      <div className="bg-night text-paper px-5 py-3 flex items-center gap-3 shadow-2xl border border-brass/40">
-        <span className="material-symbols-outlined text-brass ms-fill text-[18px]">check_circle</span>
+      <div className="bg-ink text-paper px-5 py-3 flex items-center gap-3 shadow-2xl border border-red/40">
+        <span className="material-symbols-outlined text-red ms-fill text-[18px]">check_circle</span>
         <span className="font-mono text-[11px] uppercase tracking-[0.2em]">{message}</span>
       </div>
     </div>

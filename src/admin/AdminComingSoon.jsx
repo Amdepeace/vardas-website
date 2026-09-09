@@ -8,7 +8,7 @@ export function AdminComingSoon() {
       <div className="flex items-end justify-between mb-8">
         <div>
           <p className="text-label-caps text-outline uppercase mb-2">Module</p>
-          <h2 className="playfair text-headline-xl text-deep-navy">{label}</h2>
+          <h2 className="playfair text-headline-xl text-ink">{label}</h2>
         </div>
       </div>
       <div className="rounded-xl border border-outline-variant bg-surface-container-lowest p-10 text-on-surface-variant">

@@ -22,7 +22,7 @@ export function EventsPage({ onReserve }) {
                 <p className="label !tracking-[0.2em] text-red">{e.when}</p>
                 <h2 className="font-display text-3xl text-ink mt-1">{e.title}</h2>
                 <p className="text-sm text-grey-1 mt-2">{e.lineup}</p>
-                <p className="label !tracking-[0.16em] text-muted mt-3">Dress · {e.dress}</p>
+                <p className="label !tracking-[0.16em] text-grey-2 mt-3">Dress · {e.dress}</p>
               </div>
               <div className="flex flex-col items-start md:items-end gap-3">
                 <Price>{e.cover === null ? "Cover announced weekly" : e.cover === 0 ? "No cover" : `Cover ETB ${e.cover}`}</Price>
@@ -31,7 +31,7 @@ export function EventsPage({ onReserve }) {
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-[12px] text-muted">Starter calendar. Published events replace this list once entered in the admin console.</p>
+        <p className="mt-8 text-[12px] text-grey-2">Starter calendar. Published events replace this list once entered in the admin console.</p>
       </section>
     </div>
   );

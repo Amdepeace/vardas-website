@@ -36,10 +36,10 @@ export function MenuPage({ onReserve }) {
                 <div key={s.id} id={s.id}>
                   <div className="flex items-baseline justify-between border-b border-ink pb-3">
                     <h2 className="font-display text-3xl text-ink">{s.title}</h2>
-                    {s.note && <span className="label !tracking-[0.18em] text-muted">{s.note}</span>}
+                    {s.note && <span className="label !tracking-[0.18em] text-grey-2">{s.note}</span>}
                   </div>
                   {items === null ? (
-                    <p className="py-6 text-sm text-muted">Loading…</p>
+                    <p className="py-6 text-sm text-grey-2">Loading…</p>
                   ) : rows.length ? (
                     <ul className="divide-y divide-line">
                       {rows.map((i) => (
@@ -48,12 +48,12 @@ export function MenuPage({ onReserve }) {
                             <p className="text-ink">{i.name}{i.seasonal && <span className="ml-2 label !tracking-[0.16em] text-ink">seasonal</span>}</p>
                             {i.description && <p className="text-sm text-grey-2 mt-0.5">{i.description}</p>}
                           </div>
-                          <Price>{etb(i.price_etb)}<span className="text-muted"> / {i.unit}</span></Price>
+                          <Price>{etb(i.price_etb)}<span className="text-grey-2"> / {i.unit}</span></Price>
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="py-6 text-sm text-muted">
+                    <p className="py-6 text-sm text-grey-2">
                       {backendReady ? "Card being entered — nothing is listed until it has a price." : "The card is published from the admin console once each item has its price. Nothing appears here without one."}
                     </p>
                   )}

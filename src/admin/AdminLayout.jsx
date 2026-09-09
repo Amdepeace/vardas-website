@@ -42,12 +42,12 @@ export function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-background text-on-background flex">
-      <nav className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 py-8 items-center w-[120px] bg-deep-navy border-r border-outline-variant">
+      <nav className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 py-8 items-center w-[120px] bg-ink border-r border-outline-variant">
         <div className="mb-10 flex flex-col items-center text-center px-2">
-          <span className="material-symbols-outlined ms-fill text-warm-gold text-4xl mb-2">
+          <span className="material-symbols-outlined ms-fill text-red text-4xl mb-2">
             hotel_class
           </span>
-          <h1 className="playfair text-warm-gold tracking-tight uppercase text-xl leading-tight">
+          <h1 className="playfair text-red tracking-tight uppercase text-xl leading-tight">
             Vardas
           </h1>
           <span className="text-[11px] tracking-[0.18em] text-on-primary-container mt-1 uppercase opacity-80">
@@ -84,7 +84,7 @@ export function AdminLayout() {
         <div className="flex flex-col w-full gap-2 px-3 mt-auto">
           <button
             onClick={handleSignOut}
-            className="flex flex-col items-center justify-center p-2 text-on-primary-container opacity-70 hover:text-warm-gold hover:bg-primary-container/50 transition-all duration-300 rounded-lg w-full"
+            className="flex flex-col items-center justify-center p-2 text-on-primary-container opacity-70 hover:text-red hover:bg-primary-container/50 transition-all duration-300 rounded-lg w-full"
           >
             <span className="material-symbols-outlined text-xl mb-1">logout</span>
             <span className="text-[10px] tracking-[0.15em] uppercase font-semibold">
@@ -96,17 +96,17 @@ export function AdminLayout() {
 
       <main className="flex-1 md:ml-[120px] min-h-screen flex flex-col">
         <header className="flex justify-between items-center h-20 w-full px-5 md:px-10 bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-30">
-          <h1 className="playfair text-headline-lg font-medium text-deep-navy">
+          <h1 className="playfair text-headline-lg font-medium text-ink">
             Management Console
           </h1>
           <div className="flex items-center gap-6">
-            <button className="text-on-surface-variant hover:text-warm-gold transition-colors relative">
+            <button className="text-on-surface-variant hover:text-red transition-colors relative">
               <span className="material-symbols-outlined">notifications</span>
-              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-warm-gold"></span>
+              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red"></span>
             </button>
             <div
               title={role?.display_name || user?.email}
-              className="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-primary-container flex items-center justify-center text-warm-gold playfair text-sm font-semibold"
+              className="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-primary-container flex items-center justify-center text-red playfair text-sm font-semibold"
             >
               {initials || "?"}
             </div>

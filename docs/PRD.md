@@ -3,7 +3,7 @@
 **Client** Vardas Bar & Restaurant / Nightclub — 5th floor, Getu Commercial Building, Africa Avenue, Bole, Addis Ababa
 **Version** 2.0 · **Date** 2026-09-09 · **Status** Scope approved, pre-build · **Branch** `claude/prd-roadmap-security-nav-cy070z`
 
-> v2.0 replaces v1.0, which was written against the wrong client (Bellevue hotel). The codebase is the former Bellvue site and is being **rebranded** for Vardas.
+> v2.0 replaces v1.0, which targeted the wrong client. The existing codebase is being **rebranded** for Vardas.
 
 ---
 
