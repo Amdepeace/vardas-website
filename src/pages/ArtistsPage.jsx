@@ -9,7 +9,7 @@ export function ArtistsPage({ onToast }) {
         <div className="md:col-span-5 space-y-8">
           <div>
             <Kicker>Rooms & sound</Kicker>
-            <ul className="mt-4 text-sm text-ink/80 space-y-2 leading-relaxed">
+            <ul className="mt-4 text-sm text-grey-1 space-y-2 leading-relaxed">
               <li>· Lounge stage — live sets, up to 60 seated</li>
               <li>· Club floor — DJ booth, up to 200 standing</li>
               <li>· Private room — own PA, closed-door showcases</li>
@@ -18,7 +18,7 @@ export function ArtistsPage({ onToast }) {
           </div>
           <div>
             <Kicker>Co-hosted nights</Kicker>
-            <p className="mt-4 text-sm text-ink/80 leading-relaxed">Promoters can pitch a monthly night. Door split, published cover, and our pledge applies to your guests too — no bottle pressure, ever.</p>
+            <p className="mt-4 text-sm text-grey-1 leading-relaxed">Promoters can pitch a monthly night. Door split, published cover, and our pledge applies to your guests too — no bottle pressure, ever.</p>
           </div>
         </div>
         <form className="md:col-span-7 grid sm:grid-cols-2 gap-5" onSubmit={(e) => { e.preventDefault(); onToast("Thanks — the events team will reply"); }}>

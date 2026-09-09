@@ -9,11 +9,11 @@ import { ZONES } from "../data/venue";
  */
 export function Tour({ slug, title }) {
   return (
-    <div className="relative border border-line bg-night aspect-video overflow-hidden" data-tour={slug}>
+    <div className="relative border border-line bg-ink aspect-video overflow-hidden" data-tour={slug}>
       <Placeholder tone="dark" aspect="auto" label={`${title} · equirectangular`} className="absolute inset-0" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-paper">
-        <span className="material-symbols-outlined text-5xl text-brass">360</span>
-        <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.25em] text-paper/80">360° tour · {title}</p>
+        <span className="material-symbols-outlined text-5xl text-red">360</span>
+        <p className="mt-3 label !tracking-[0.25em] text-paper/80">360° tour · {title}</p>
         <p className="mt-1 text-[12px] text-paper/60">Panoramas are captured in Phase 2 · auto-rotate walkthrough</p>
       </div>
     </div>
@@ -33,9 +33,9 @@ export function ToursPage({ onReserve }) {
             <div className="md:col-span-8"><Tour slug={z.tour} title={z.title} /></div>
             <div className="md:col-span-4">
               <Kicker>{z.smoking ? "Smoking · marked areas" : "Smoke-free"}</Kicker>
-              <h2 className="font-serif text-3xl text-night mt-3">{z.title}</h2>
-              <p className="text-sm text-ink/70 mt-3 leading-relaxed">{z.blurb}</p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted mt-4">Capacity · {z.capacity}</p>
+              <h2 className="font-display text-3xl text-ink mt-3">{z.title}</h2>
+              <p className="text-sm text-grey-1 mt-3 leading-relaxed">{z.blurb}</p>
+              <p className="label !tracking-[0.16em] text-muted mt-4">Capacity · {z.capacity}</p>
               <CTA variant="ghost" className="mt-6" onClick={() => onReserve({ zone: z.id })}>Reserve here</CTA>
             </div>
           </div>

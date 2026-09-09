@@ -10,12 +10,12 @@ function Card({ p }) {
   return (
     <li className="border border-line bg-paper-2 p-5 flex flex-col gap-2">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-xl text-night">{p.name}</h3>
+        <h3 className="font-display text-xl text-ink">{p.name}</h3>
         <Tier tier={p.safety_tier} />
       </div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">{p.category}{p.neighborhood ? ` · ${p.neighborhood}` : ""}</p>
-      <p className="text-sm text-ink/75 leading-relaxed">{p.highlights}</p>
-      {p.safety_notes && <p className="text-[12.5px] text-ink/60 leading-relaxed border-l-2 border-line pl-3 mt-1">{p.safety_notes}</p>}
+      <p className="label !tracking-[0.16em] text-muted">{p.category}{p.neighborhood ? ` · ${p.neighborhood}` : ""}</p>
+      <p className="text-sm text-grey-1 leading-relaxed">{p.highlights}</p>
+      {p.safety_notes && <p className="text-[12.5px] text-grey-2 leading-relaxed border-l-2 border-line pl-3 mt-1">{p.safety_notes}</p>}
     </li>
   );
 }
@@ -39,7 +39,7 @@ export function ClubPage({ onNavigate, onReserve }) {
           <div className="border-y lg:border-y-0 lg:border-x border-line py-8 lg:py-0 lg:px-10 flex flex-col">
             <Kicker>22:00 · Vardas</Kicker>
             <Placeholder label="Club floor · midnight" aspect="4/5" className="mt-5" />
-            <p className="mt-5 text-sm text-ink/75 leading-relaxed">Fifth floor, Getu Commercial Building. Lift from the Africa Avenue entrance. Smart dress; no smoking on the floor. Ask for the floor manager by name.</p>
+            <p className="mt-5 text-sm text-grey-1 leading-relaxed">Fifth floor, Getu Commercial Building. Lift from the Africa Avenue entrance. Smart dress; no smoking on the floor. Ask for the floor manager by name.</p>
             <CTA variant="solid" className="mt-6" onClick={() => onNavigate("getting-here")}>Getting here safely</CTA>
           </div>
           <div>

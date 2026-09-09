@@ -19,10 +19,10 @@ export function EventsPage({ onReserve }) {
             <li key={e.slug} className="py-8 grid md:grid-cols-[200px,1fr,auto] gap-6 items-center">
               <Placeholder label={e.title} aspect="4/3" />
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-brass">{e.when}</p>
-                <h2 className="font-serif text-3xl text-night mt-1">{e.title}</h2>
-                <p className="text-sm text-ink/70 mt-2">{e.lineup}</p>
-                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted mt-3">Dress · {e.dress}</p>
+                <p className="label !tracking-[0.2em] text-red">{e.when}</p>
+                <h2 className="font-display text-3xl text-ink mt-1">{e.title}</h2>
+                <p className="text-sm text-grey-1 mt-2">{e.lineup}</p>
+                <p className="label !tracking-[0.16em] text-muted mt-3">Dress · {e.dress}</p>
               </div>
               <div className="flex flex-col items-start md:items-end gap-3">
                 <Price>{e.cover === null ? "Cover announced weekly" : e.cover === 0 ? "No cover" : `Cover ETB ${e.cover}`}</Price>

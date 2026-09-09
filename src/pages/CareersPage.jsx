@@ -15,10 +15,10 @@ export function CareersPage({ onToast }) {
       <section className="density-sect max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
         <SectionHead kicker="Standards" title="What working here means." />
         <ul className="grid sm:grid-cols-2 gap-5">
-          {STANDARDS.map(([t, b]) => <li key={t} className="border border-line bg-paper-2 p-6"><h3 className="font-serif text-xl text-night">{t}</h3><p className="text-sm text-ink/75 mt-2 leading-relaxed">{b}</p></li>)}
+          {STANDARDS.map(([t, b]) => <li key={t} className="border border-line bg-paper-2 p-6"><h3 className="font-display text-xl text-ink">{t}</h3><p className="text-sm text-grey-1 mt-2 leading-relaxed">{b}</p></li>)}
         </ul>
         <div className="mt-20 grid md:grid-cols-12 gap-12">
-          <div className="md:col-span-5"><Kicker>Open roles</Kicker><p className="mt-4 text-sm text-ink/75">Roles are published from the admin console. Until then, tell us what you do.</p></div>
+          <div className="md:col-span-5"><Kicker>Open roles</Kicker><p className="mt-4 text-sm text-grey-1">Roles are published from the admin console. Until then, tell us what you do.</p></div>
           <form className="md:col-span-7 grid sm:grid-cols-2 gap-5" onSubmit={(e) => { e.preventDefault(); onToast("Received — we reply within a week"); }}>
             <Field label="I am a"><select className="field-line"><option>Job applicant</option><option>Supplier</option></select></Field>
             <Field label="Name"><input className="field-line" required /></Field>

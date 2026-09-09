@@ -17,21 +17,21 @@ export function HirePage({ onNavigate, onToast }) {
             <div key={z.id} className="border border-line bg-paper-2">
               <Placeholder label={`${z.title} · 360°`} aspect="4/3" />
               <div className="p-5">
-                <div className="flex justify-between items-baseline"><h3 className="font-serif text-xl text-night">{z.title}</h3><Price>up to {z.capacity}</Price></div>
-                <p className="text-sm text-ink/70 mt-2 leading-relaxed">{z.blurb}</p>
-                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Minimum · published on request-to-quote</p>
-                <button onClick={() => onNavigate("tours")} className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-brass hover:text-night">Walk through in 360° →</button>
+                <div className="flex justify-between items-baseline"><h3 className="font-display text-xl text-ink">{z.title}</h3><Price>up to {z.capacity}</Price></div>
+                <p className="text-sm text-grey-1 mt-2 leading-relaxed">{z.blurb}</p>
+                <p className="mt-3 label !tracking-[0.16em] text-muted">Minimum · published on request-to-quote</p>
+                <button onClick={() => onNavigate("tours")} className="mt-3 label !tracking-[0.2em] text-red hover:text-ink">Walk through in 360° →</button>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-night text-paper">
+      <section className="bg-ink text-paper">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-20 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5">
-            <Kicker className="!text-brass-soft">Request a quote</Kicker>
-            <h2 className="font-serif text-4xl mt-4 leading-tight">Tell us the night. We'll price it in 48 hours.</h2>
+            <Kicker inverse>Request a quote</Kicker>
+            <h2 className="font-display text-4xl mt-4 leading-tight">Tell us the night. We'll price it in 48 hours.</h2>
             <ul className="mt-8 space-y-3 text-sm text-paper/70">
               <li>· Published packages, no hidden service charge</li>
               <li>· Deposit by Chapa / Telebirr, hosted checkout</li>

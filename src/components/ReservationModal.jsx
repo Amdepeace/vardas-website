@@ -54,7 +54,7 @@ export function ReservationModal({ open, onClose, prefill, onConfirm }) {
         <div className="px-6 md:px-8 py-5 border-b border-line flex items-start justify-between bg-night text-paper">
           <div>
             <Kicker className="!text-brass-soft">Reserve · 5th floor</Kicker>
-            <h2 className="font-serif text-2xl mt-2">A table on your terms</h2>
+            <h2 className="font-display text-2xl mt-2">A table on your terms</h2>
           </div>
           <button onClick={onClose} aria-label="Close" className="text-paper/70 hover:text-paper"><span className="material-symbols-outlined">close</span></button>
         </div>
@@ -62,7 +62,7 @@ export function ReservationModal({ open, onClose, prefill, onConfirm }) {
         {done ? (
           <div className="px-6 md:px-8 py-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-brass">Reference {done}</p>
-            <h3 className="font-serif text-3xl mt-3 text-night">See you on the fifth floor.</h3>
+            <h3 className="font-display text-3xl mt-3 text-night">See you on the fifth floor.</h3>
             <p className="mt-4 text-sm text-ink/75 leading-relaxed">
               {backendReady ? "We'll confirm on WhatsApp shortly." : "Preview mode — no reservation was sent. Connect Supabase to go live."}
               {" "}Remember: every price is published, water is free, and we're at 2,355 m — alcohol works harder here.

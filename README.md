@@ -38,5 +38,5 @@ src/
   admin/                 staff console (Supabase Auth + staff_roles)
 ```
 
-Design tokens live in `tailwind.config.js` (Night / Brass / Smoke / Paper / Terrace / Ember; Bodoni Moda · Manrope · IBM Plex Mono).
+Design tokens live in `tailwind.config.js` (Paper / Ink / Red + hairline greys; Inter 300/500/900, Cormorant Garamond italic for quotes) — ported from the client's reference, see PRD §9.
 Security headers and CSP: `vercel.json`. CI: `.github/workflows/ci.yml` (build; migrations apply on Postgres 15; RLS on every table).

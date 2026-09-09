@@ -23,7 +23,7 @@ The website's job is to make Vardas the venue people **choose in advance, not st
 | Navigation & safety | Getting to Vardas safely · Bole after-dark guide (Vardas as anchor of the circuit) · In-building guide (Getu Commercial Center) · Guest safety promise |
 | 3D previews | 360° self-hosted tours (Photo Sphere Viewer, auto-rotate walkthrough) behind a swappable `<Tour />` |
 | Signature features | AI host (Claude) · Cinematic scroll · Digital guest-list / table pass (Apple/Google Wallet) · Multilingual + WhatsApp reservations |
-| Template | 21st.dev **Cinematic Editorial**, re-tokenised for a nightlife brand |
+| Template | Client reference (Swiss-editorial portfolio): Inter 900 display, Paper / Ink / Red, top nav, split hero — see §9. 21st.dev components used only where they fit that system |
 | Data scope | From the 50-row Addis POI & Safety table: Vardas itself, the 4 Getu Commercial Center neighbours, Bole & Kazanchis districts, and the 17 clubs/lounges of the circuit (24 rows) |
 
 ---
@@ -181,9 +181,12 @@ Trust pledge and safety promise as above; ride-home partner sees first name + pi
 
 ## 9. Brand & design spec (for the rebrand)
 
-- **Palette**: Night `#0E0B10` · Brass `#C8A452` · Smoke `#8C8A94` · Paper `#F5F1EA` · Terrace green `#2F6B4F` (verified/positive) · Ember `#D3572E` (caution). Dark-first on Club and Hero; paper on Menu, Hire, Your Terms.
-- **Type**: Bodoni Moda (display, high-contrast glamour) · Manrope (body) · IBM Plex Mono (prices, data).
-- **Rule**: prices are always set in mono, always visible; brass is spent on one element per viewport.
+Direction locked 2026-09-09 from the client's reference (a Swiss-editorial portfolio):
+
+- **Palette**: Paper `#F8F8F6` ground · Ink `#0A0A0A` · one accent, Red `#E84040` · hairlines `#E0E0DC` / `#E8E8E4` · greys `#555 / #888 / #999 / #BBB` · dark sections `#0A0A0A` with `#111` cards. No gold, no navy.
+- **Type**: **Inter** everywhere — 300 body, 500 labels (uppercase, 0.12–0.3em tracking), **900 uppercase display** with tight (-0.02em) tracking and outline-stroked words; **Cormorant Garamond italic** only for quotes ("They said").
+- **Layout language**: fixed 70px top nav (brand · links · black CTA that turns red on hover); split hero (text left, grayscale photo right, red dot); tiny red section labels with a short rule; 1px-gap stat grids; numbered service rows with square arrows on dark; 3px-gap work grid, grayscale → colour on hover, with a filter bar; dark quote cards; "Let's talk" split with channel pills; black footer bar.
+- **Rules**: square corners everywhere; prices always visible (Inter 500, tabular); red is spent on one element per viewport; photos grayscale at rest.
 
 ## 10. Roadmap (18 weeks)
 

@@ -33,9 +33,9 @@ export function HostWidget() {
       </button>
       <div className={`fixed bottom-24 right-6 z-[69] w-[360px] max-w-[calc(100vw-3rem)] h-[520px] max-h-[calc(100vh-8rem)] bg-paper border border-line shadow-2xl flex flex-col origin-bottom-right transition-all duration-300 ${open ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}>
         <div className="px-5 py-4 border-b border-line bg-night text-paper flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-brass/20 flex items-center justify-center"><span className="font-serif text-brass-soft text-lg">S</span></div>
+          <div className="w-10 h-10 rounded-full bg-brass/20 flex items-center justify-center"><span className="font-display text-brass-soft text-lg">S</span></div>
           <div className="flex-1">
-            <p className="font-serif text-base tracking-[0.18em]">HOST</p>
+            <p className="font-display text-base tracking-[0.18em]">HOST</p>
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/60 flex items-center gap-1.5">
               <span className={`w-1.5 h-1.5 rounded-full ${backendReady ? "bg-terrace animate-pulse" : "bg-smoke"}`} /> {backendReady ? "Online · Selam" : "Preview · Selam"}
             </p>
