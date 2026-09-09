@@ -36,7 +36,7 @@ export function AdminLogin() {
       <div className="hidden md:flex flex-col justify-between bg-ink text-red p-12">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined ms-fill text-red text-4xl">
-            hotel_class
+            nightlife
           </span>
           <div>
             <h1 className="display text-3xl tracking-tight uppercase">Vardas</h1>
@@ -46,11 +46,10 @@ export function AdminLogin() {
           </div>
         </div>
         <blockquote className="display text-2xl text-paper/85 leading-relaxed max-w-md">
-          "There is an unhurried generosity to the place — the way coffee arrives,
-          the way the light moves through the corridor at four o'clock."
+          "Every price published. Bottle service only on request. A named floor manager every night. A safe ride home."
         </blockquote>
         <p className="text-[11px] tracking-[0.25em] uppercase opacity-60">
-          Management Console · v0.1
+          Staff console · Your night, your terms
         </p>
       </div>
 
