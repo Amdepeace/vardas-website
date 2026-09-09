@@ -1,0 +1,492 @@
+{
+  "meta": {
+    "client": "Vardas Bar & Restaurant / Nightclub",
+    "address": "5th floor, Getu Commercial Building, Africa Avenue, Bole, Addis Ababa",
+    "source": "Addis Ababa Points of Interest and Safety Guide.xlsx",
+    "filtered": "Vardas + in-building venues + Bole/Kazanchis districts + the club/lounge circuit",
+    "count": 24,
+    "origin": {
+      "name": "Vardas",
+      "building": "Getu Commercial Building",
+      "floor": 5,
+      "lat": 8.9936,
+      "lng": 38.7893
+    }
+  },
+  "vardas_facts": {
+    "rating": 3.8,
+    "spend_range_etb": [
+      1600,
+      19200
+    ],
+    "highlights": "Located on the 5th floor of Getu Commercial Building on Africa Avenue. Features international and traditional Ethiopian dishes (pizza, fish, beef, pasta), seasonal menus, hookah, beer, and liqueur. Known for interior design, live music, DJs, and outdoor seating.",
+    "criticisms_to_answer": [
+      "Pressure to buy expensive liquor (up to ETB 19,200)",
+      "Smoking allowed indoors",
+      "Some reports of unprofessional staff",
+      "High altitude (2,355 m) increases effects of alcohol"
+    ],
+    "sources": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "sources": {
+    "1": "2nd Gen Ethiopian traveling to Addis — r/Ethiopia",
+    "2": "Vardas Addis — Wanderlog",
+    "3": "What's a good club or lounge in Ethiopia — Reddit",
+    "4": "Vardas Bar and Restaurant — Modern Addis",
+    "5": "Vardas Bar & Restaurant — menu, prices, reviews",
+    "6": "Live Music, Jazz & Nightlife in Addis — local guide",
+    "7": "Addis Ababa Nightlife — BEST CLUBS in the CITY",
+    "8": "Addis Ababa Safety Guide for Solo Female Travelers — Her Safe Voyage"
+  },
+  "places": [
+    {
+      "id": "vardas",
+      "name": "Vardas",
+      "relation": "self",
+      "circuit_role": null,
+      "category": "Restaurant / Nightclub",
+      "neighborhood": "Bole",
+      "highlights": "Located on the 5th floor of Getu Commercial Building on Africa Avenue. Features international and traditional Ethiopian dishes (pizza, fish, beef, pasta), seasonal menus, hookah, beer, and liqueur. Known for interior design, live music, DJs, and outdoor seating.",
+      "safety_notes": "Smoking allowed indoors. Be cautious of pressure to buy expensive liquor (up to ETB 19,200) and stay vigilant around security. High altitude may increase the effects of alcohol. Some reports of unprofessional staff.",
+      "rating": 3.8,
+      "price_etb": [
+        1600,
+        19200
+      ],
+      "price_raw": "3.8/5; ETB 1,600 - 19,200",
+      "sources": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_note": null,
+      "safety_tier": "self"
+    },
+    {
+      "id": "atmosphere",
+      "name": "Atmosphere",
+      "relation": "circuit",
+      "circuit_role": "before",
+      "category": "Cultural Center / Lounge",
+      "neighborhood": "Bole Area",
+      "highlights": "A cultural hub and pre-party spot known for late-night coffee, Iranian food (hummus), games, comedy shows, and events like Indian Cultural Day.",
+      "safety_notes": "Welcoming atmosphere described as a hub for fun; recommended for any time of night. Use trusted drivers.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        1,
+        6,
+        7
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "bole",
+      "name": "Bole",
+      "relation": "district",
+      "circuit_role": null,
+      "category": "Neighborhood / Business District",
+      "neighborhood": "Bole",
+      "highlights": "International business district near the airport; features modern infrastructure, expat-friendly amenities, international hotels, and chain restaurants.",
+      "safety_notes": "Good night walking safety and excellent daytime safety. Decent lighting and security at night. English-speaking staff are common.",
+      "rating": 4.0,
+      "price_etb": null,
+      "price_raw": "4.0/5",
+      "sources": [
+        8
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "kazanchis",
+      "name": "Kazanchis",
+      "relation": "district",
+      "circuit_role": null,
+      "category": "Neighborhood / Diplomatic District",
+      "neighborhood": "Kazanchis",
+      "highlights": "Diplomatic and professional hub featuring high-end restaurants, high security presence, and international standards.",
+      "safety_notes": "Excellent daytime safety and good night safety. Lowest harassment risk in the city; recommended for being out late.",
+      "rating": 4.0,
+      "price_etb": null,
+      "price_raw": "4.0/5",
+      "sources": [
+        8
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "midtown-ultra-lounge",
+      "name": "Midtown Ultra Lounge",
+      "relation": "circuit",
+      "circuit_role": "after",
+      "category": "Nightclub / Lounge",
+      "neighborhood": null,
+      "highlights": "Popular, \"dope\" spot for nightlife and dancing.",
+      "safety_notes": "Watch alcohol consumption due to high altitude effects.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        1,
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "black-rose",
+      "name": "Black Rose",
+      "relation": "circuit",
+      "circuit_role": "before",
+      "category": "Bar / Lounge",
+      "neighborhood": null,
+      "highlights": "Chill, upscale spot for cocktails and professional socializing.",
+      "safety_notes": "Quiet and professional environment.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        1
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "monarch-hotel-360-lounge",
+      "name": "Monarch Hotel 360 Lounge",
+      "relation": "circuit",
+      "circuit_role": "before",
+      "category": "Rooftop Lounge",
+      "neighborhood": null,
+      "highlights": "Luxurious rooftop views featuring live DJs, cocktails, and a relaxed vibe.",
+      "safety_notes": "Smart dress recommended. Avoid walking at night; use hotel taxis for transport.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        6
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "jazzamba-lounge",
+      "name": "Jazzamba Lounge",
+      "relation": "circuit",
+      "circuit_role": "before",
+      "category": "Jazz Lounge",
+      "neighborhood": "Piazza",
+      "highlights": "Historic hotspot inside the Taitu Hotel with a vintage ambiance; features up-and-coming Ethiopian jazz artists on weekends.",
+      "safety_notes": "Located in a historic district; best to use a local guide for access and safe transport.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        6
+      ],
+      "source_note": null,
+      "safety_tier": "caution"
+    },
+    {
+      "id": "2000-habesha-cultural-club",
+      "name": "2000 Habesha Cultural Club",
+      "relation": "circuit",
+      "circuit_role": "before",
+      "category": "Cultural Club",
+      "neighborhood": null,
+      "highlights": "High-energy venue featuring a mix of modern and traditional music, shoulder dancing, and audience participation.",
+      "safety_notes": "High-energy environment; use trusted drivers or hotel taxis.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        6
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "luna-lounge",
+      "name": "Luna Lounge",
+      "relation": "circuit",
+      "circuit_role": "after",
+      "category": "Nightclub",
+      "neighborhood": null,
+      "highlights": "Modern music venue with energetic DJs and a vibrant late-night crowd.",
+      "safety_notes": "Stick to well-known clubs, dress smart, and use trusted transport.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        6
+      ],
+      "source_note": null,
+      "safety_tier": "caution"
+    },
+    {
+      "id": "illusion-lounge",
+      "name": "Illusion Lounge",
+      "relation": "circuit",
+      "circuit_role": "after",
+      "category": "Lounge / Club",
+      "neighborhood": null,
+      "highlights": "Also known as Catch; trendy and stylish venue featuring cocktails, music, and occasional live bands.",
+      "safety_notes": "Recommended place to end the night. Stick to well-known venues for safety.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        6,
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "zoya",
+      "name": "Zoya",
+      "relation": "circuit",
+      "circuit_role": "event",
+      "category": "Nightlife Event",
+      "neighborhood": null,
+      "highlights": "Monthly event described as the \"Mecca of house music\" in Addis; features house, EDM, and techno.",
+      "safety_notes": "Described as having an incredible, positive vibe.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        7
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "wakanda",
+      "name": "Wakanda",
+      "relation": "circuit",
+      "circuit_role": "after",
+      "category": "Nightclub",
+      "neighborhood": null,
+      "highlights": "Popular nightclub noted for a high-energy \"lit\" atmosphere.",
+      "safety_notes": "Part of the recommended local nightlife circuit.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        7
+      ],
+      "source_note": null,
+      "safety_tier": "verified"
+    },
+    {
+      "id": "upscale",
+      "name": "Upscale",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Lounge",
+      "neighborhood": null,
+      "highlights": "Known for being a \"chill\" spot; currently closed as part of the \"corridor development\" project.",
+      "safety_notes": "Temporarily closed with no relocation yet.",
+      "rating": null,
+      "price_etb": null,
+      "price_raw": "Google Maps reviews",
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "closed"
+    },
+    {
+      "id": "middletown",
+      "name": "Middletown",
+      "relation": "in-building",
+      "circuit_role": null,
+      "category": "Restaurant",
+      "neighborhood": "Getu Commercial Center",
+      "highlights": "Local dining establishment.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": "Ranked #2180 of 6980",
+      "sources": [
+        5
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "tokuma-restaurant-no-1",
+      "name": "Tokuma Restaurant No.1",
+      "relation": "in-building",
+      "circuit_role": null,
+      "category": "Restaurant",
+      "neighborhood": "Getu Commercial Center",
+      "highlights": "Local dining establishment.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": "Ranked #2177 of 6980",
+      "sources": [
+        5
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "yesitota-restaurant-gift",
+      "name": "Yesitota Restaurant & Gift",
+      "relation": "in-building",
+      "circuit_role": null,
+      "category": "Restaurant",
+      "neighborhood": "Getu Commercial Center",
+      "highlights": "Local dining establishment combined with a gift shop.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": "Ranked #2185 of 6980",
+      "sources": [
+        5
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "fast-food",
+      "name": "Fast food",
+      "relation": "in-building",
+      "circuit_role": null,
+      "category": "Restaurant",
+      "neighborhood": "Getu Commercial Center",
+      "highlights": "Quick-service food outlet.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": "Ranked #3067 of 6980",
+      "sources": [
+        5
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "black-pearl",
+      "name": "Black Pearl",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Club/Lounge",
+      "neighborhood": null,
+      "highlights": "Nightlife spot for socializing with friends.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "cage",
+      "name": "Cage",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Club/Lounge",
+      "neighborhood": null,
+      "highlights": "Local nightlife spot.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "flirt",
+      "name": "Flirt",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Club",
+      "neighborhood": null,
+      "highlights": "One of the older, established clubs in the city.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "palmy",
+      "name": "Palmy",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Club/Lounge",
+      "neighborhood": null,
+      "highlights": "Local nightlife spot.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "v-lounge",
+      "name": "V Lounge",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Lounge",
+      "neighborhood": null,
+      "highlights": "Local nightlife spot.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    },
+    {
+      "id": "surrender",
+      "name": "Surrender",
+      "relation": "circuit",
+      "circuit_role": null,
+      "category": "Club/Lounge",
+      "neighborhood": null,
+      "highlights": "Local nightlife spot.",
+      "safety_notes": null,
+      "rating": null,
+      "price_etb": null,
+      "price_raw": null,
+      "sources": [
+        3
+      ],
+      "source_note": null,
+      "safety_tier": "unverified"
+    }
+  ]
+}
