@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { CTA, Field, Hero, Kicker, Placeholder, Price, SectionHead } from "../components/primitives";
 import { ZONES } from "../data/venue";
+import { backendReady, enquire } from "../lib/api";
 
 export function HirePage({ onNavigate, onToast }) {
   const [f, setF] = useState({ company: "", name: "", phone: "", kind: "corporate", date: "", guests: 40, zone: "private-1", brief: "" });
+  const [busy, setBusy] = useState(false);
   const set = (k) => (e) => setF((d) => ({ ...d, [k]: e.target.value }));
+  async function submit(e) {
+    e.preventDefault(); setBusy(true);
+    try {
+      if (backendReady) await enquire({ kind: "hire", company: f.company || undefined, contact_name: f.name, phone: f.phone, event_kind: f.kind, preferred_date: f.date || undefined, guests: Number(f.guests) || undefined, zone_id: f.zone, brief: f.brief || undefined });
+      onToast(backendReady ? "Enquiry received — we quote within 48 hours" : "Preview mode — enquiry not sent");
+      setF({ company: "", name: "", phone: "", kind: "corporate", date: "", guests: 40, zone: "private-1", brief: "" });
+    } catch (ex) { onToast(ex.message); } finally { setBusy(false); }
+  }
   return (
     <div className="page-enter page-enter-active">
       <Hero kicker="Professional · events & private hire" title="Your launch." em="Our fifth floor." label="Hire hero · private room set for a launch"
@@ -40,7 +50,7 @@ export function HirePage({ onNavigate, onToast }) {
             </ul>
           </div>
           <form className="md:col-span-7 grid sm:grid-cols-2 gap-5 [&_.field-line]:text-paper [&_.field-line]:border-paper/40 [&_label]:!text-paper/70"
-            onSubmit={(e) => { e.preventDefault(); onToast("Enquiry noted — we reply within 48 hours"); }}>
+            onSubmit={submit}>
             <Field label="Company"><input className="field-line" value={f.company} onChange={set("company")} /></Field>
             <Field label="Your name"><input className="field-line" required value={f.name} onChange={set("name")} /></Field>
             <Field label="Phone (WhatsApp)"><input className="field-line" required value={f.phone} onChange={set("phone")} /></Field>
@@ -49,7 +59,7 @@ export function HirePage({ onNavigate, onToast }) {
             <Field label="Guests"><input type="number" min="6" className="field-line" value={f.guests} onChange={set("guests")} /></Field>
             <Field label="Zone"><select className="field-line" value={f.zone} onChange={set("zone")}>{ZONES.map((z) => <option key={z.id} value={z.id}>{z.title} · up to {z.capacity}</option>)}</select></Field>
             <Field label="Brief"><input className="field-line" placeholder="Occasion, food, music, budget…" value={f.brief} onChange={set("brief")} /></Field>
-            <div className="sm:col-span-2"><CTA type="submit" variant="brass">Request a quote →</CTA></div>
+            <div className="sm:col-span-2"><CTA type="submit" variant="red" disabled={busy}>{busy ? "Sending…" : "Request a quote →"}</CTA></div>
           </form>
         </div>
       </section>

@@ -4,8 +4,10 @@ import PublicApp from "./PublicApp";
 import { AdminGuard } from "./admin/AdminGuard";
 import { AdminLayout } from "./admin/AdminLayout";
 import { AdminLogin } from "./admin/AdminLogin";
-import { BookingsPage } from "./admin/pages/BookingsPage";
-import { GuestsPage } from "./admin/pages/GuestsPage";
+import { ReservationsPage } from "./admin/pages/ReservationsPage";
+import { MenuAdminPage } from "./admin/pages/MenuAdminPage";
+import { EventsAdminPage } from "./admin/pages/EventsAdminPage";
+import { EnquiriesPage } from "./admin/pages/EnquiriesPage";
 import { AdminComingSoon } from "./admin/AdminComingSoon";
 
 export default function App() {
@@ -22,9 +24,11 @@ export default function App() {
               </AdminGuard>
             }
           >
-            <Route index element={<Navigate to="/admin/bookings" replace />} />
-            <Route path="bookings" element={<BookingsPage />} />
-            <Route path="guests" element={<GuestsPage />} />
+            <Route index element={<Navigate to="/admin/reservations" replace />} />
+            <Route path="reservations" element={<ReservationsPage />} />
+            <Route path="menu" element={<MenuAdminPage />} />
+            <Route path="events" element={<EventsAdminPage />} />
+            <Route path="enquiries" element={<EnquiriesPage />} />
             <Route path=":section" element={<AdminComingSoon />} />
           </Route>
           <Route path="/*" element={<PublicApp />} />

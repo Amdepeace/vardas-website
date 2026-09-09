@@ -21,3 +21,6 @@ export function reserve(payload) {
 export function askHost(messages) {
   return call("host", { messages });
 }
+export function enquire(payload) {
+  return call("enquire", payload);
+}

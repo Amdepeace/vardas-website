@@ -2,25 +2,14 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const NAV = [
-  { to: "/admin/bookings", icon: "hotel", label: "Bookings", live: true },
-  { to: "/admin/spa", icon: "spa", label: "Spa", live: false },
-  { to: "/admin/gym", icon: "fitness_center", label: "Gym", live: false },
-  { to: "/admin/guests", icon: "groups", label: "Guests", live: true },
-  {
-    to: "/admin/housekeeping",
-    icon: "cleaning_services",
-    label: "Rooms",
-    live: false,
-  },
-  { to: "/admin/reports", icon: "analytics", label: "Reports", live: false },
-  { to: "/admin/reviews", icon: "reviews", label: "Reviews", live: false },
-  {
-    to: "/admin/maintenance",
-    icon: "build",
-    label: "Engineer",
-    live: false,
-  },
-  { to: "/admin/cms", icon: "edit_document", label: "CMS", live: false, divider: true },
+  { to: "/admin/reservations", icon: "table_restaurant", label: "Tables", live: true },
+  { to: "/admin/menu", icon: "restaurant_menu", label: "Menu", live: true },
+  { to: "/admin/events", icon: "event", label: "Events", live: true },
+  { to: "/admin/enquiries", icon: "inbox", label: "Enquiries", live: true },
+  { to: "/admin/places", icon: "map", label: "Places", live: false },
+  { to: "/admin/tours", icon: "360", label: "Tours", live: false },
+  { to: "/admin/advisories", icon: "campaign", label: "Advisories", live: false },
+  { to: "/admin/policies", icon: "verified_user", label: "Pledge", live: false, divider: true },
 ];
 
 export function AdminLayout() {
@@ -45,9 +34,9 @@ export function AdminLayout() {
       <nav className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 py-8 items-center w-[120px] bg-ink border-r border-outline-variant">
         <div className="mb-10 flex flex-col items-center text-center px-2">
           <span className="material-symbols-outlined ms-fill text-red text-4xl mb-2">
-            hotel_class
+            nightlife
           </span>
-          <h1 className="playfair text-red tracking-tight uppercase text-xl leading-tight">
+          <h1 className="display text-red tracking-tight uppercase text-xl leading-tight">
             Vardas
           </h1>
           <span className="text-[11px] tracking-[0.18em] text-on-primary-container mt-1 uppercase opacity-80">
@@ -96,8 +85,8 @@ export function AdminLayout() {
 
       <main className="flex-1 md:ml-[120px] min-h-screen flex flex-col">
         <header className="flex justify-between items-center h-20 w-full px-5 md:px-10 bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-30">
-          <h1 className="playfair text-headline-lg font-medium text-ink">
-            Management Console
+          <h1 className="display text-headline-lg font-medium text-ink">
+            Vardas · Staff console
           </h1>
           <div className="flex items-center gap-6">
             <button className="text-on-surface-variant hover:text-red transition-colors relative">
@@ -106,7 +95,7 @@ export function AdminLayout() {
             </button>
             <div
               title={role?.display_name || user?.email}
-              className="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-primary-container flex items-center justify-center text-red playfair text-sm font-semibold"
+              className="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-primary-container flex items-center justify-center text-red display text-sm font-semibold"
             >
               {initials || "?"}
             </div>

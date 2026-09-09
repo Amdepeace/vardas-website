@@ -1,9 +1,32 @@
 # Vardas · Website PRD & Roadmap
 
 **Client** Vardas Bar & Restaurant / Nightclub — 5th floor, Getu Commercial Building, Africa Avenue, Bole, Addis Ababa
-**Version** 2.0 · **Date** 2026-09-09 · **Status** Scope approved, pre-build · **Branch** `claude/prd-roadmap-security-nav-cy070z`
+**Version** 2.2 · **Date** 2026-09-09 · **Status** MVP delivered (Phases 0–1 core); Phases 2–6 scheduled · **Branch** `claude/prd-roadmap-security-nav-cy070z`
 
 > v2.0 replaces v1.0, which targeted the wrong client. The existing codebase is being **rebranded** for Vardas.
+
+---
+
+## 0. MVP delivered (v2.2)
+
+What is live in the repository today, verified by build and screenshots. Everything runs in **preview mode** without Supabase (forms and the host say so) and switches to live behaviour when `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` are set and the migrations + seed are applied.
+
+| Area | Delivered |
+|---|---|
+| Public site | 11 routed pages — Home, Menu, Club, Events, Hire, 360°, Getting Here, Your Terms, Artists, Careers, Contact — in the client's reference design system (Inter 900 display, Paper / Ink / Red) |
+| Data on the page | Getting Here (Bole night-safety rating, the 4 Getu-building neighbours) and Club (17-venue circuit as before / after Vardas with source safety lines and tiers) read `src/data/places.json` |
+| Trust layer | "Your Night, Your Terms" page and Home section: the four recorded criticisms beside the four public answers |
+| Reservations | Modal (service · zone · party · ride-home) → `reserve` Edge Function → `reservations` |
+| Enquiries | Hire, Artists, Careers/Suppliers forms → `enquire` Edge Function → `hire_enquiries`, `artists` (+`artist_bookings`), `applications` |
+| Menu | Public page lists only items with a real price (`price_etb > 0`), grouped by section |
+| Events | Public page shows published events from Supabase, starter calendar otherwise |
+| Host | "Selam" widget → `host` Edge Function (Claude, cached grounding on menu / zones / policies / events) |
+| Staff console | Supabase Auth + `staff_roles`; pages: **Tables** (reservations board with status flow and tonight's covers / rides), **Menu** (price CRUD — an item cannot be saved without a price), **Events** (CRUD, publish toggle), **Enquiries** (hire pipeline new → quoted → confirmed / lost; artist approval; applications) |
+| Database | `0001` staff auth · `0002` Vardas core (18 tables, RLS on all) · `0003` rate-limit counters · `0004` retires hotel tables · `seed_vardas.sql` (24 places, zones, sections, 6 policies, 3 starter events) |
+| Security | RLS everywhere; anon has no insert policy — all writes via validated, rate-limited Edge Functions with the service role; CSP + HSTS + frame/referrer headers; secrets only in function config |
+| Ops | CI: build, migrations applied on Postgres 15, fail if any table lacks RLS; favicon, robots.txt, sitemap, Open Graph; README |
+
+**Not in the MVP (next phases):** phone OTP before reservation writes and WhatsApp templates (Phase 1 close-out); MapLibre live map, ride-partner dispatch and advisories UI (Phase 2); 360° capture and viewer (Phase 3 — `<Tour />` placeholder is in place); private-hire deposits, artist portal login (Phase 4); scroll motion, host tools and streaming, i18n (Phase 5); wallet passes, careers CMS, pen-test (Phase 6). Admin pages for Places, Tours, Advisories and Pledge are stubbed as "coming soon".
 
 ---
 

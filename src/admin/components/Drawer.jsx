@@ -31,7 +31,7 @@ export function Drawer({ open, onClose, eyebrow, title, actions, children }) {
                 {eyebrow}
               </p>
             )}
-            <h2 className="playfair text-2xl text-ink">{title}</h2>
+            <h2 className="display text-2xl text-ink">{title}</h2>
           </div>
           <button
             onClick={onClose}

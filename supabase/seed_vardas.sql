@@ -60,3 +60,10 @@ insert into public.policies (slug, title, body_md, published) values
   ('ride-home',        'A safe ride home',    'We work only with vetted drivers and partners. Ask any staff member, scan the table QR, or tick "ride home" when you reserve.', true),
   ('womens-safety',    'Women''s safety',     'Our door and floor teams are trained to intervene. If anyone makes you uncomfortable, tell any staff member — we will handle it quietly and immediately.', true)
 on conflict (slug) do update set title = excluded.title, body_md = excluded.body_md, published = excluded.published, updated_at = now();
+
+-- Starter events (next occurrences are computed by staff; these are published examples).
+insert into public.events (slug, title, kind, starts_at, ends_at, lineup, cover_etb, dress_code, published) values
+  ('live-thursdays',      'Live Thursdays',       'live-music', date_trunc('week', now()) + interval '3 days 21 hours', null, '{"Rotating Ethio-jazz and soul sets"}', 0,    'Smart casual',        true),
+  ('fifth-floor-fridays', 'Fifth Floor Fridays',  'club-night', date_trunc('week', now()) + interval '4 days 22 hours', null, '{"Resident DJs","Afrobeats · amapiano · house"}', 0, 'Smart · no sportswear', true),
+  ('saturday-sessions',   'Saturday Sessions',    'club-night', date_trunc('week', now()) + interval '5 days 22 hours', null, '{"Guest DJ announced weekly"}', 0, 'Smart', true)
+on conflict (slug) do nothing;

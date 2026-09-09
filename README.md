@@ -20,10 +20,13 @@ Without Supabase configured the site runs in **preview mode**: reservations and 
 supabase/migrations/0001_initial.sql        # staff_roles + is_staff() (hotel tables retired in 0004)
 supabase/migrations/0002_vardas_core.sql    # menu, policies, zones, reservations, events, hire, artists, places, rides, advisories, tours, careers
 supabase/migrations/0003_rate_limit.sql     # counters for Edge Functions
+supabase/migrations/0004_retire_hotel_tables.sql  # drops the old hotel tables (destructive)
 supabase/seed_vardas.sql                    # places from src/data/places.json, starter zones/sections/policies
 ```
 
-Edge Functions (`supabase/functions/`): `reserve`, `host` — see the README there for secrets and deploy commands.
+Edge Functions (`supabase/functions/`): `reserve`, `enquire`, `host` — see the README there for secrets and deploy commands.
+
+**Staff console** at `/admin` (Supabase Auth; a row in `staff_roles` grants access): Tables · Menu & prices · Events · Enquiries.
 
 ## Structure
 
@@ -35,7 +38,7 @@ src/
   pages/                 Home, Menu, Club, Events, Hire, Tours, GettingHere, YourTerms, Artists, Careers, Contact
   data/venue.js          zones, policies, venue facts (mirrors seed_vardas.sql)
   data/places.json       24 places from the Addis POI & Safety Guide, tagged by relation to Vardas
-  admin/                 staff console (Supabase Auth + staff_roles)
+  admin/                 staff console: ReservationsPage, MenuAdminPage, EventsAdminPage, EnquiriesPage
 ```
 
 Design tokens live in `tailwind.config.js` (Paper / Ink / Red + hairline greys; Inter 300/500/900, Cormorant Garamond italic for quotes) — ported from the client's reference, see PRD §9.

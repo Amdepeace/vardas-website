@@ -1,14 +1,26 @@
-import { CTA, Hero, Placeholder, Price, SectionHead } from "../components/primitives";
+import { useEffect, useState } from "react";
+import { CTA, Hero, Placeholder, Price } from "../components/primitives";
+import { backendReady } from "../lib/api";
+import { supabase } from "../lib/supabase";
 
-// Starter calendar until events are published from the admin console.
-const EVENTS = [
+// Starter calendar, shown until published events exist in Supabase.
+const STARTER = [
   { slug: "thursday-live", title: "Live Thursdays", kind: "live-music", when: "Every Thursday · 21:00", lineup: "Rotating Ethio-jazz and soul sets", cover: 0, dress: "Smart casual" },
   { slug: "friday-club", title: "Fifth Floor Fridays", kind: "club-night", when: "Every Friday · 22:00 – late", lineup: "Resident DJs · Afrobeats, amapiano, house", cover: null, dress: "Smart · no sportswear" },
   { slug: "saturday-club", title: "Saturday Sessions", kind: "club-night", when: "Every Saturday · 22:00 – late", lineup: "Guest DJ announced weekly", cover: null, dress: "Smart" },
   { slug: "business-lunch", title: "Business Lunch", kind: "brunch", when: "Mon – Fri · 12:00 – 15:00", lineup: "Two-course set menu · quiet lounge · WiFi", cover: 0, dress: "—" },
 ];
 
+const fmt = (iso) => new Date(iso).toLocaleString("en-GB", { weekday: "long", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+
 export function EventsPage({ onReserve }) {
+  const [live, setLive] = useState(null);
+  useEffect(() => {
+    if (!backendReady) { setLive([]); return; }
+    supabase.from("events").select("*").eq("published", true).gte("starts_at", new Date(Date.now() - 6 * 3600e3).toISOString()).order("starts_at").limit(20)
+      .then(({ data }) => setLive((data || []).map((e) => ({ slug: e.slug, title: e.title, kind: e.kind, when: fmt(e.starts_at), lineup: (e.lineup || []).join(" · "), cover: e.cover_etb ?? 0, dress: e.dress_code || "—" }))));
+  }, []);
+  const EVENTS = live && live.length ? live : STARTER;
   return (
     <div className="page-enter page-enter-active">
       <Hero kicker="Events" title="What's on" em="this week." label="Events hero · live set"
