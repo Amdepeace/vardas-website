@@ -1,160 +1,82 @@
 import { useEffect, useState } from "react";
-import { Footer, MobileHeader, NAV_ITEMS, SideRail } from "./components/Shell";
-import { BookingModal, Toast } from "./components/BookingModal";
+import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Footer, MobileHeader, NAV_ITEMS, SideRail, pathToId } from "./components/Shell";
+import { ReservationModal, Toast } from "./components/ReservationModal";
+import { HostWidget } from "./components/HostWidget";
 import { HomePage } from "./pages/HomePage";
-import { RoomsPage } from "./pages/RoomsPage";
-import { SpaPage } from "./pages/SpaPage";
-import { GymPage } from "./pages/GymPage";
-import { AboutPage } from "./pages/AboutPage";
+import { MenuPage } from "./pages/MenuPage";
+import { ClubPage } from "./pages/ClubPage";
+import { EventsPage } from "./pages/EventsPage";
+import { HirePage } from "./pages/HirePage";
+import { ToursPage } from "./pages/ToursPage";
+import { GettingHerePage } from "./pages/GettingHerePage";
+import { YourTermsPage } from "./pages/YourTermsPage";
+import { ArtistsPage } from "./pages/ArtistsPage";
+import { CareersPage } from "./pages/CareersPage";
 import { ContactPage } from "./pages/ContactPage";
-import { DiningPage } from "./pages/DiningPage";
-import { OffersPage } from "./pages/OffersPage";
-import { ExperiencesPage } from "./pages/ExperiencesPage";
-import { GalleryPage } from "./pages/GalleryPage";
-import { CirclePage } from "./pages/CirclePage";
-import { VenuesPage } from "./pages/VenuesPage";
-import { PressStrip } from "./components/PressStrip";
-import { ConciergeWidget } from "./components/ConciergeWidget";
-
-const PAGES = NAV_ITEMS.map((n) => n.id);
 
 export default function PublicApp() {
-  const [page, setPage] = useState(() => {
-    const h = window.location.hash.replace(/^#/, "");
-    return PAGES.includes(h) ? h : "home";
-  });
+  const location = useLocation();
+  const nav = useNavigate();
+  const active = pathToId(location.pathname);
 
-  useEffect(() => {
-    function onHash() {
-      const h = window.location.hash.replace(/^#/, "");
-      if (PAGES.includes(h)) setPage(h);
-    }
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, []);
+  useEffect(() => { document.body.setAttribute("data-density", "spacious"); }, []);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [location.pathname]);
 
-  useEffect(() => {
-    document.body.setAttribute("data-density", "spacious");
-  }, []);
-
+  // Brass spotlight that follows the pointer over hero sections.
   useEffect(() => {
     const handlers = new Map();
-    let raf;
     function attach() {
-      document
-        .querySelectorAll('section[data-screen-label*="Hero"]')
-        .forEach((el) => {
-          if (handlers.has(el)) return;
-          const onMove = (e) => {
-            const r = el.getBoundingClientRect();
-            el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-            el.style.setProperty("--my", `${e.clientY - r.top}px`);
-            el.style.setProperty("--blob-opacity", "1");
-          };
-          const onLeave = () => el.style.setProperty("--blob-opacity", "0");
-          el.addEventListener("mousemove", onMove);
-          el.addEventListener("mouseleave", onLeave);
-          handlers.set(el, { onMove, onLeave });
-        });
-    }
-    function loop() {
-      attach();
-      raf = requestAnimationFrame(loop);
-    }
-    raf = requestAnimationFrame(loop);
-    return () => {
-      cancelAnimationFrame(raf);
-      handlers.forEach(({ onMove, onLeave }, el) => {
-        el.removeEventListener("mousemove", onMove);
-        el.removeEventListener("mouseleave", onLeave);
+      document.querySelectorAll('section[data-screen-label*="Hero"]').forEach((el) => {
+        if (handlers.has(el)) return;
+        const onMove = (e) => { const r = el.getBoundingClientRect(); el.style.setProperty("--mx", `${e.clientX - r.left}px`); el.style.setProperty("--my", `${e.clientY - r.top}px`); el.style.setProperty("--blob-opacity", "1"); };
+        const onLeave = () => el.style.setProperty("--blob-opacity", "0");
+        el.addEventListener("mousemove", onMove); el.addEventListener("mouseleave", onLeave);
+        handlers.set(el, { onMove, onLeave });
       });
-    };
+    }
+    attach();
+    const mo = new MutationObserver(attach);
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => { mo.disconnect(); handlers.forEach(({ onMove, onLeave }, el) => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); }); };
   }, []);
 
-  function navigate(p) {
-    setPage(p);
-    window.location.hash = p;
-    window.scrollTo({ top: 0, behavior: "instant" });
+  function navigate(id) {
+    const item = NAV_ITEMS.find((n) => n.id === id);
+    nav(item ? item.path : "/");
   }
 
   const [modal, setModal] = useState({ open: false, prefill: null });
   const [toast, setToast] = useState("");
-
-  function openBooking(prefill) {
-    setModal({ open: true, prefill: prefill || null });
-  }
-  function closeBooking() {
-    setModal({ open: false, prefill: null });
-  }
-  function confirmBooking() {
-    setToast("Confirmation sent — check your inbox.");
-  }
-
-  function renderPage() {
-    const props = {
-      onNavigate: navigate,
-      onBook: openBooking,
-      onToast: (m) => setToast(m),
-    };
-    switch (page) {
-      case "home":
-        return <HomePage {...props} />;
-      case "rooms":
-        return <RoomsPage {...props} />;
-      case "dining":
-        return <DiningPage {...props} />;
-      case "spa":
-        return <SpaPage {...props} />;
-      case "gym":
-        return <GymPage {...props} />;
-      case "experiences":
-        return <ExperiencesPage {...props} />;
-      case "offers":
-        return <OffersPage {...props} />;
-      case "venues":
-        return <VenuesPage {...props} />;
-      case "gallery":
-        return <GalleryPage {...props} />;
-      case "circle":
-        return <CirclePage {...props} />;
-      case "about":
-        return <AboutPage {...props} />;
-      case "contact":
-        return <ContactPage {...props} />;
-      default:
-        return <HomePage {...props} />;
-    }
-  }
+  const openReserve = (prefill) => setModal({ open: true, prefill: prefill || null });
+  const props = { onNavigate: navigate, onReserve: openReserve, onToast: setToast };
 
   return (
-    <div className="min-h-screen">
-      <SideRail
-        active={page}
-        onNavigate={navigate}
-        onBook={() => openBooking()}
-      />
-      <MobileHeader
-        active={page}
-        onNavigate={navigate}
-        onBook={() => openBooking()}
-      />
-
+    <div className="min-h-screen bg-paper">
+      <SideRail active={active} onNavigate={navigate} onReserve={() => openReserve()} />
+      <MobileHeader active={active} onNavigate={navigate} onReserve={() => openReserve()} />
       <main className="md:ml-[88px] xl:ml-[104px] pt-14 md:pt-0">
-        <div key={page}>{renderPage()}</div>
-        {page === "home" && <PressStrip />}
-        <Footer onNavigate={navigate} ethiopian />
+        <Routes>
+          <Route path="/" element={<HomePage {...props} />} />
+          <Route path="/menu" element={<MenuPage {...props} />} />
+          <Route path="/club" element={<ClubPage {...props} />} />
+          <Route path="/events" element={<EventsPage {...props} />} />
+          <Route path="/events/:slug" element={<EventsPage {...props} />} />
+          <Route path="/hire" element={<HirePage {...props} />} />
+          <Route path="/tours" element={<ToursPage {...props} />} />
+          <Route path="/tours/:slug" element={<ToursPage {...props} />} />
+          <Route path="/getting-here" element={<GettingHerePage {...props} />} />
+          <Route path="/your-terms" element={<YourTermsPage {...props} />} />
+          <Route path="/artists" element={<ArtistsPage {...props} />} />
+          <Route path="/careers" element={<CareersPage {...props} />} />
+          <Route path="/contact" element={<ContactPage {...props} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Footer onNavigate={navigate} />
       </main>
-
-      <BookingModal
-        open={modal.open}
-        prefill={modal.prefill}
-        onClose={closeBooking}
-        onConfirm={confirmBooking}
-      />
-
+      <ReservationModal open={modal.open} prefill={modal.prefill} onClose={() => setModal({ open: false, prefill: null })} onConfirm={() => setToast("Reservation request received")} />
       <Toast message={toast} onDone={() => setToast("")} />
-
-      <ConciergeWidget />
+      <HostWidget />
     </div>
   );
 }

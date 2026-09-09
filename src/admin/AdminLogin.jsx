@@ -39,13 +39,13 @@ export function AdminLogin() {
             hotel_class
           </span>
           <div>
-            <h1 className="playfair text-3xl tracking-tight uppercase">Bellevue</h1>
+            <h1 className="display text-3xl tracking-tight uppercase">Vardas</h1>
             <p className="text-[11px] tracking-[0.18em] uppercase opacity-70">
               Staff Portal
             </p>
           </div>
         </div>
-        <blockquote className="playfair text-2xl text-cream/85 leading-relaxed max-w-md">
+        <blockquote className="display text-2xl text-cream/85 leading-relaxed max-w-md">
           "There is an unhurried generosity to the place — the way coffee arrives,
           the way the light moves through the corridor at four o'clock."
         </blockquote>
@@ -56,11 +56,11 @@ export function AdminLogin() {
 
       <div className="flex items-center justify-center p-8">
         <form onSubmit={onSubmit} className="w-full max-w-sm">
-          <h2 className="playfair text-headline-lg text-deep-navy mb-2">
+          <h2 className="display text-headline-lg text-deep-navy mb-2">
             Sign in
           </h2>
           <p className="text-on-surface-variant text-body-md mb-8">
-            Use your Bellevue staff credentials.
+            Use your Vardas staff credentials.
           </p>
 
           <label className="block mb-5">

@@ -48,7 +48,7 @@ export function AdminLayout() {
             hotel_class
           </span>
           <h1 className="playfair text-warm-gold tracking-tight uppercase text-xl leading-tight">
-            Bellevue
+            Vardas
           </h1>
           <span className="text-[11px] tracking-[0.18em] text-on-primary-container mt-1 uppercase opacity-80">
             Staff Portal

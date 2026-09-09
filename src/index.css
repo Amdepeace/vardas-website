@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --accent: #b8973a;
-    --accent-soft: #d4b968;
+    --accent: #c8a452;
+    --accent-soft: #e3c57a;
   }
   html,
   body {
-    background: #f9f7f3;
-    color: #2a2a2a;
+    background: #f5f1ea;
+    color: #1b171e;
   }
   body {
     overflow-x: hidden;
@@ -41,25 +41,25 @@
   .field-line {
     background: transparent;
     border: 0;
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: 1px solid #1b171e;
     border-radius: 0;
     padding: 12px 0 10px;
     width: 100%;
-    font: 400 15px/1.4 "Inter", sans-serif;
-    color: #2a2a2a;
+    font: 400 15px/1.4 "Manrope", system-ui, sans-serif;
+    color: #1b171e;
     transition: border-color 0.3s ease;
   }
   .field-line:focus {
     outline: none;
-    border-bottom-color: var(--accent, #b8973a);
+    border-bottom-color: var(--accent, #c8a452);
   }
   .field-line::placeholder {
-    color: #a29a8b;
+    color: #9a948c;
   }
   select.field-line {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%232A2A2A' fill='none' stroke-width='1.2' stroke-linecap='round'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%231B171E' fill='none' stroke-width='1.2' stroke-linecap='round'/></svg>");
     background-repeat: no-repeat;
     background-position: right center;
     padding-right: 18px;
@@ -79,7 +79,7 @@
   }
 
   .hairline {
-    background: linear-gradient(to right, transparent, #c4bba8 50%, transparent);
+    background: linear-gradient(to right, transparent, #c8a452 50%, transparent);
     height: 1px;
   }
 
@@ -97,8 +97,8 @@
   .stripe-bg {
     background-image: repeating-linear-gradient(
       135deg,
-      rgba(26, 46, 74, 0.06) 0,
-      rgba(26, 46, 74, 0.06) 1px,
+      rgba(14, 11, 16, 0.06) 0,
+      rgba(14, 11, 16, 0.06) 1px,
       transparent 1px,
       transparent 14px
     );
@@ -203,7 +203,7 @@
     pointer-events: none;
     background: radial-gradient(
       circle 380px at var(--mx, 50%) var(--my, 50%),
-      rgba(184, 151, 58, 0.22),
+      rgba(200, 164, 82, 0.22),
       transparent 65%
     );
     opacity: var(--blob-opacity, 0);
@@ -214,26 +214,26 @@
 }
 
 @layer components {
-  .playfair {
-    font-family: "Playfair Display", serif;
+  .display {
+    font-family: "Bodoni Moda", Didot, Georgia, serif;
   }
 
   .nav-item .nav-inner {
-    color: #8296b7;
+    color: #a39fa9;
     opacity: 0.7;
   }
   .nav-item.active .nav-inner {
-    color: #b8973a;
+    color: #c8a452;
     opacity: 0.95;
-    background: #1a2e4a;
-    border-right: 2px solid #b8973a;
+    background: #1a1520;
+    border-right: 2px solid #c8a452;
   }
   .nav-item.active .nav-inner .material-symbols-outlined {
     font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
   }
   .nav-item:not(.active):hover .nav-inner {
-    color: #b8973a;
-    background: rgba(26, 46, 74, 0.5);
+    color: #c8a452;
+    background: rgba(26, 21, 32, 0.6);
   }
 
   .text-label-caps {
