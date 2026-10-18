@@ -18,28 +18,28 @@ export function SupportDock() {
   const [open, setOpen] = useState(false);
   return (
     <div className="fixed right-4 sm:right-6 bottom-4 sm:bottom-6 z-[90] flex flex-col items-end gap-3">
-      <div className={`w-[300px] max-w-[calc(100vw-2rem)] bg-night-2 border border-edge shadow-2xl origin-bottom-right transition-all duration-200 ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`} role="dialog" aria-label="Contact Vardas" aria-hidden={!open}>
-        <div className="px-5 py-4 border-b border-edge flex items-center gap-3">
+      <div className={`w-[300px] max-w-[calc(100vw-2rem)] bg-ink-2 border border-line-dark shadow-2xl origin-bottom-right transition-all duration-200 ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`} role="dialog" aria-label="Contact Vardas" aria-hidden={!open}>
+        <div className="px-5 py-4 border-b border-line-dark flex items-center gap-3">
           <img src="/brand/vardas-mark.png" alt="" className="w-9 h-9 object-contain" />
-          <div><p className="text-cream text-sm font-medium">Vardas guest support</p><p className="text-xs text-mute">A real person replies — usually within minutes.</p></div>
+          <div><p className="text-paper text-sm font-medium">Vardas guest support</p><p className="text-xs text-grey-4">A real person replies — usually within minutes.</p></div>
         </div>
         <ul className="p-2">
           {TOPICS.map(([t, msg]) => (
-            <li key={t} className="flex items-center gap-2 px-3 py-2.5 hover:bg-night-3">
-              <span className="flex-1 text-sm text-cream">{t}</span>
+            <li key={t} className="flex items-center gap-2 px-3 py-2.5 hover:bg-ink-3">
+              <span className="flex-1 text-sm text-paper">{t}</span>
               <a href={waLink(msg)} target="_blank" rel="noopener noreferrer" aria-label={`${t} on WhatsApp`} className="text-wa hover:scale-110 transition-transform">{WA}</a>
               <a href={tgLink()} target="_blank" rel="noopener noreferrer" aria-label={`${t} on Telegram`} className="text-tg hover:scale-110 transition-transform">{TG}</a>
             </li>
           ))}
         </ul>
-        <div className="px-5 py-3 border-t border-edge flex justify-between text-xs">
-          <a href={`mailto:${SITE.email}`} className="text-gold hover:text-gold-light">Email us</a>
-          <a href={`tel:${SITE.phoneE164}`} className="text-mute hover:text-cream">{SITE.phoneDisplay}</a>
+        <div className="px-5 py-3 border-t border-line-dark flex justify-between text-xs">
+          <a href={`mailto:${SITE.email}`} className="text-red hover:text-red-soft">Email us</a>
+          <a href={`tel:${SITE.phoneE164}`} className="text-grey-4 hover:text-paper">{SITE.phoneDisplay}</a>
         </div>
       </div>
       <a href={tgLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat on Telegram" title="Telegram" className="vx-focus w-12 h-12 rounded-full bg-tg text-white flex items-center justify-center shadow-xl hover:scale-105 transition-transform">{TG}</a>
       <a href={waLink("Hi Vardas, ")} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" title="WhatsApp" className="vx-focus w-12 h-12 rounded-full bg-wa text-white flex items-center justify-center shadow-xl hover:scale-105 transition-transform">{WA}</a>
-      <button onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label={open ? "Close support" : "Open support"} className="vx-focus w-14 h-14 rounded-full gold-fill text-night flex items-center justify-center shadow-2xl hover:brightness-110">
+      <button onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label={open ? "Close support" : "Open support"} className="vx-focus w-14 h-14 rounded-full cta-fill text-ink flex items-center justify-center shadow-2xl hover:brightness-110">
         <span className="material-symbols-outlined">{open ? "close" : "support_agent"}</span>
       </button>
     </div>

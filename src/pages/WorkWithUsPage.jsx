@@ -3,16 +3,16 @@ import { RequestForm } from "../components/RequestForm";
 export function WorkWithUsPage({ onToast }) {
   return (
     <div>
-      <PageHero image="/gallery/vardas-night-18.jpg" label="Artists · careers · suppliers" title="Work with" gold="Vardas" intro="DJs, live acts and promoters; floor, bar and door staff; suppliers. Tell us who you are." />
+      <PageHero image="/gallery/vardas-night-18.jpg" label="Artists · careers · suppliers" title="Work with" accent="Vardas" intro="DJs, live acts and promoters; floor, bar and door staff; suppliers. Tell us who you are." />
       <Section>
         <div className="grid lg:grid-cols-12 gap-14">
-          <div className="lg:col-span-4 space-y-6 text-sm text-mute leading-relaxed">
-            <p><span className="text-cream">Artists &amp; promoters</span> — club floor and lounge stage, resident and guest slots, co-hosted nights.</p>
-            <p><span className="text-cream">Team</span> — no commission on bottles, ever. Every hire is trained on our guest pledge.</p>
-            <p><span className="text-cream">Suppliers</span> — drinks, food, production, security.</p>
+          <div className="lg:col-span-4 space-y-6 text-sm text-grey-4 leading-relaxed">
+            <p><span className="text-paper">Artists &amp; promoters</span> — club floor and lounge stage, resident and guest slots, co-hosted nights.</p>
+            <p><span className="text-paper">Team</span> — no commission on bottles, ever. Every hire is trained on our guest pledge.</p>
+            <p><span className="text-paper">Suppliers</span> — drinks, food, production, security.</p>
           </div>
           <div className="lg:col-span-8">
-            <Heading title="Introduce" gold="yourself" className="mb-8" />
+            <Heading title="Introduce" accent="yourself" className="mb-8" />
             <RequestForm onToast={onToast} cta="Send →" doneTitle="Thanks — we'll be in touch"
               initial={{ who: "artist", name: "", phone: "", email: "", links: "", message: "" }}
               fields={[

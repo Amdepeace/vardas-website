@@ -11,7 +11,7 @@ export function VenueEnquirePage({ onToast }) {
   const label = TYPES.find(([v]) => v === type)[1];
   return (
     <div>
-      <PageHero image="/gallery/venue-hero.jpg" label="Vardas Venue · enquiry" title="Plan your" gold="event" intro={`${label}s and more. Share the basics — the events team replies with availability and a proposal.`} />
+      <PageHero image="/gallery/venue-hero.jpg" label="Vardas Venue · enquiry" title="Plan your" accent="event" intro={`${label}s and more. Share the basics — the events team replies with availability and a proposal.`} />
       <Section>
         <div className="max-w-3xl">
           <RequestForm key={type} onToast={onToast} cta="Send enquiry →" doneTitle="Event enquiry received"

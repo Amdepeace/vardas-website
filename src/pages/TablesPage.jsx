@@ -8,23 +8,23 @@ export function TablesPage({ onToast }) {
   const today = new Date().toISOString().slice(0, 10);
   return (
     <div>
-      <PageHero image="/gallery/vardas-night-23.jpg" label="Vardas · VIP tables" title="Request a" gold="table" intro="Pick the night, the zone and your party size. A host confirms by phone with any minimum spend and your arrival time — nothing is charged online." />
+      <PageHero image="/gallery/vardas-night-23.jpg" label="Vardas · VIP tables" title="Request a" accent="table" intro="Pick the night, the zone and your party size. A host confirms by phone with any minimum spend and your arrival time — nothing is charged online." />
       <Section>
         <div className="grid lg:grid-cols-12 gap-14">
           <div className="lg:col-span-5">
             <Label>Zones</Label>
-            <ul className="mt-6 border-t border-edge">
+            <ul className="mt-6 border-t border-line-dark">
               {TABLE_ZONES.map((z) => (
-                <li key={z.id} className="border-b border-edge py-6">
-                  <div className="flex justify-between gap-4"><p className="vx-display text-lg text-cream">{z.name}</p><p className="text-sm text-gold whitespace-nowrap">{z.seats}</p></div>
-                  <p className="text-sm text-mute mt-2">{z.note}</p>
+                <li key={z.id} className="border-b border-line-dark py-6">
+                  <div className="flex justify-between gap-4"><p className="vx-display text-lg text-paper">{z.name}</p><p className="text-sm text-red whitespace-nowrap">{z.seats}</p></div>
+                  <p className="text-sm text-grey-4 mt-2">{z.note}</p>
                 </li>
               ))}
             </ul>
-            <p className="text-xs text-mute-2 mt-6 leading-relaxed">Bottle service is only ever on request, and its price is on the menu. Valid ID required.</p>
+            <p className="text-xs text-grey-2 mt-6 leading-relaxed">Bottle service is only ever on request, and its price is on the menu. Valid ID required.</p>
           </div>
           <div className="lg:col-span-7">
-            <Heading title="Your" gold="night" className="mb-8" />
+            <Heading title="Your" accent="night" className="mb-8" />
             <RequestForm onToast={onToast} cta="Request table →" doneTitle="Table request received"
               initial={{ date: today, time: "22:30", zone: "club-floor", party: 6, name: "", phone: "", email: "", ride: false, notes: q.get("event") ? `For ${q.get("event").replace(/-/g, " ")}` : "" }}
               fields={[

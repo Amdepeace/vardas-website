@@ -4,6 +4,7 @@ One site for **Vardas** (lounge & club, 5th floor Getu Commercial Building, Bole
 Vite + React 18 + Tailwind + Supabase. Clean-room rebuild of the multi-venue nightclub pattern — recon in [`replica/`](replica/recon.md).
 
 ### What's on the site
+- Design: the akom system — Inter (300 body · 500 labels · 900 uppercase display), Cormorant Garamond italic for quotes; ink #0A0A0A, paper #F8F8F6, one red #E84040, akom greys. The logo stays gold.
 - Cinematic video hero (`public/media/vardas-hero*.mp4` — swap in new footage, same names), logo and imagery in `public/brand`, `public/gallery`
 - Top nav with **Vardas ▾** and **Vardas Venue ▾** dropdowns; mobile drawer
 - Events + event pages, **VIP table requests**, **Vardas Venue enquiries** (corporate / private / concert / wedding), gallery with lightbox, FAQ, menu, getting here, contact, work with us

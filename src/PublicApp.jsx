@@ -31,8 +31,8 @@ export default function PublicApp() {
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); document.title = TITLES[pathname] || "Vardas Entertainment"; }, [pathname]);
   const p = { onToast: setToast };
   return (
-    <div className="min-h-screen bg-night text-cream">
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] gold-fill text-night px-4 py-2">Skip to content</a>
+    <div className="min-h-screen bg-ink text-paper">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] cta-fill text-ink px-4 py-2">Skip to content</a>
       <TopNav />
       <main id="main">
         <Routes>

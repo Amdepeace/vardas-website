@@ -34,12 +34,12 @@ export function RequestForm({ fields, initial, build, cta = "Send request", done
   if (done) {
     const text = `${doneTitle}\n` + Object.entries(done.summary).map(([k, v]) => `${k}: ${v}`).join("\n");
     return (
-      <div className="bg-night-2 border border-gold/40 p-8 sm:p-10">
-        <p className="vx-label text-gold">{done.how === "sent" ? "Sent to the Vardas team" : "Almost there"}</p>
-        <h3 className="vx-display text-2xl text-cream mt-3">{done.how === "sent" ? doneTitle : "Press send in your mail app"}</h3>
-        <p className="text-mute mt-4 max-w-lg leading-relaxed">{done.how === "sent" ? `A host will confirm by phone. Faster? Send the same details on WhatsApp or Telegram.` : `We've written the email to ${SITE.email} for you. Prefer chat? Send it on WhatsApp or Telegram instead.`}</p>
+      <div className="bg-ink-2 border border-red/40 p-8 sm:p-10">
+        <p className="vx-label text-red">{done.how === "sent" ? "Sent to the Vardas team" : "Almost there"}</p>
+        <h3 className="vx-display text-2xl text-paper mt-3">{done.how === "sent" ? doneTitle : "Press send in your mail app"}</h3>
+        <p className="text-grey-4 mt-4 max-w-lg leading-relaxed">{done.how === "sent" ? `A host will confirm by phone. Faster? Send the same details on WhatsApp or Telegram.` : `We've written the email to ${SITE.email} for you. Prefer chat? Send it on WhatsApp or Telegram instead.`}</p>
         <div className="flex flex-wrap gap-3 mt-8">
-          <Button href={waLink(text)} target="_blank" className="!bg-wa !bg-none !text-night">WhatsApp</Button>
+          <Button href={waLink(text)} target="_blank" className="!bg-wa !bg-none !text-ink">WhatsApp</Button>
           <Button href={tgLink()} target="_blank" variant="ghost">Telegram</Button>
           <Button onClick={() => setDone(null)} variant="dark">New request</Button>
         </div>
@@ -52,7 +52,7 @@ export function RequestForm({ fields, initial, build, cta = "Send request", done
       {fields.map((fd) => (
         <div key={fd.name} className={fd.wide ? "sm:col-span-2" : ""}>
           {fd.type === "checkbox" ? (
-            <label className="flex items-start gap-3 text-sm text-mute cursor-pointer pt-2"><input type="checkbox" checked={!!f[fd.name]} onChange={set(fd.name)} className="mt-1 accent-[#E2A93B]" /><span>{fd.label}</span></label>
+            <label className="flex items-start gap-3 text-sm text-grey-4 cursor-pointer pt-2"><input type="checkbox" checked={!!f[fd.name]} onChange={set(fd.name)} className="mt-1 accent-[#E84040]" /><span>{fd.label}</span></label>
           ) : (
             <Field label={fd.label + (fd.required ? " *" : "")} hint={fd.hint} error={err[fd.name]}>
               {fd.type === "select" ? (
@@ -66,9 +66,9 @@ export function RequestForm({ fields, initial, build, cta = "Send request", done
           )}
         </div>
       ))}
-      {err.form && <p className="sm:col-span-2 text-gold text-sm">{err.form}</p>}
+      {err.form && <p className="sm:col-span-2 text-red text-sm">{err.form}</p>}
       <div className="sm:col-span-2 flex flex-wrap items-center justify-between gap-4 pt-2">
-        <p className="text-xs text-mute-2 max-w-sm">{backendReady ? `Goes straight to ${SITE.email} and the Vardas team.` : `Opens your mail app addressed to ${SITE.email}.`}</p>
+        <p className="text-xs text-grey-2 max-w-sm">{backendReady ? `Goes straight to ${SITE.email} and the Vardas team.` : `Opens your mail app addressed to ${SITE.email}.`}</p>
         <Button type="submit" disabled={busy}>{busy ? "Sending…" : cta}</Button>
       </div>
     </form>
