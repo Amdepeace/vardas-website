@@ -4,7 +4,7 @@ import { Drawer, DrawerSection } from "../components/Drawer";
 import { StatusBadge } from "../components/StatusBadge";
 import { AdminTable, Btn, fmtWhen } from "../components/AdminTable";
 
-const TABS = [{ id: "hire", label: "Private hire" }, { id: "artists", label: "Artists" }, { id: "applications", label: "Careers & suppliers" }];
+const TABS = [{ id: "hire", label: "Venue events" }, { id: "contact", label: "Messages" }, { id: "artists", label: "Artists" }, { id: "applications", label: "Careers & suppliers" }, { id: "subscribers", label: "Newsletter" }];
 const HIRE_NEXT = { new: ["quoted", "lost"], quoted: ["confirmed", "lost"], confirmed: [], lost: [] };
 
 export function EnquiriesPage() {
@@ -14,6 +14,8 @@ export function EnquiriesPage() {
   async function load() {
     setLoading(true); setError("");
     const q = tab === "hire" ? supabase.from("hire_enquiries").select("*").order("created_at", { ascending: false })
+      : tab === "contact" ? supabase.from("contact_messages").select("*").order("created_at", { ascending: false })
+      : tab === "subscribers" ? supabase.from("subscribers").select("*").order("created_at", { ascending: false })
       : tab === "artists" ? supabase.from("artists").select("*").order("created_at", { ascending: false })
       : supabase.from("applications").select("*, job_openings(title)").order("created_at", { ascending: false });
     const { data, error } = await q;
@@ -30,8 +32,17 @@ export function EnquiriesPage() {
   const columns = useMemo(() => tab === "hire" ? [
       { key: "created_at", label: "Received", render: (r) => fmtWhen(r.created_at) },
       { key: "contact_name", label: "Contact", render: (r) => <><span className="font-medium">{r.contact_name}</span><span className="block text-xs text-on-surface-variant">{r.company || "—"} · {r.phone}</span></> },
-      { key: "kind", label: "Kind" }, { key: "preferred_date", label: "Date" }, { key: "guests", label: "Guests", align: "right" }, { key: "zone_id", label: "Zone" },
+      { key: "kind", label: "Kind" }, { key: "venue", label: "Venue" }, { key: "preferred_date", label: "Date" }, { key: "guests", label: "Guests", align: "right" }, { key: "zone_id", label: "Zone" },
       { key: "status", label: "Status", render: (r) => <StatusBadge status={r.status} /> },
+    ] : tab === "contact" ? [
+      { key: "created_at", label: "Received", render: (r) => fmtWhen(r.created_at) },
+      { key: "name", label: "From", render: (r) => <><span className="font-medium">{r.name}</span><span className="block text-xs text-on-surface-variant">{r.email}{r.phone ? ` · ${r.phone}` : ""}</span></> },
+      { key: "topic", label: "Topic" },
+      { key: "message", label: "Message", render: (r) => <span className="text-xs text-on-surface-variant line-clamp-2 max-w-md block">{r.message}</span> },
+      { key: "handled", label: "Status", render: (r) => <StatusBadge status={r.handled ? "completed" : "new"} /> },
+    ] : tab === "subscribers" ? [
+      { key: "created_at", label: "Joined", render: (r) => fmtWhen(r.created_at) },
+      { key: "email", label: "Email", render: (r) => <a className="underline" href={`mailto:${r.email}`} onClick={(e) => e.stopPropagation()}>{r.email}</a> },
     ] : tab === "artists" ? [
       { key: "created_at", label: "Received", render: (r) => fmtWhen(r.created_at) },
       { key: "name", label: "Act", render: (r) => <span className="font-medium">{r.name}</span> }, { key: "kind", label: "Kind" },
@@ -50,6 +61,7 @@ export function EnquiriesPage() {
         error={error} loading={loading} rows={rows} onRow={setSel} empty="Nothing here yet." columns={columns} />
       <Drawer open={!!sel} onClose={() => setSel(null)} eyebrow={tab} title={sel?.contact_name || sel?.name || ""}
         actions={sel && (tab === "hire" ? HIRE_NEXT[sel.status]?.map((s) => <Btn key={s} variant={s === "lost" ? "danger" : "solid"} onClick={() => update("hire_enquiries", sel.id, { status: s })}>{s}</Btn>)
+          : tab === "contact" ? <Btn onClick={() => update("contact_messages", sel.id, { handled: !sel.handled })}>{sel.handled ? "Mark unhandled" : "Mark handled"}</Btn>
           : tab === "artists" ? <Btn onClick={() => update("artists", sel.id, { approved: !sel.approved })}>{sel.approved ? "Unapprove" : "Approve & list"}</Btn> : null)}>
         {sel && <div className="space-y-4 text-sm">{Object.entries(sel).filter(([k, v]) => v && !["id", "job_openings", "links"].includes(k)).map(([k, v]) => <DrawerSection key={k} label={k.replace(/_/g, " ")}><p className="break-words">{Array.isArray(v) ? v.join(", ") : typeof v === "object" ? JSON.stringify(v) : String(v)}</p></DrawerSection>)}</div>}
       </Drawer>

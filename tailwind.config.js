@@ -22,12 +22,30 @@ const c = {
   "quote": "#C8C8C0",
 };
 
+// Vardas Entertainment public site — black ground, gold from the logo gradient.
+// (The light tokens above remain for the staff console.)
+const v = {
+  night: "#070605",
+  "night-2": "#0D0B09",
+  "night-3": "#15120E",
+  edge: "#2A231B",
+  gold: "#E2A93B",
+  "gold-light": "#F3CD76",
+  "gold-deep": "#A8622A",
+  cream: "#F4EEE4",
+  mute: "#A89F92",
+  "mute-2": "#6F675C",
+  wa: "#25D366",
+  tg: "#229ED9",
+};
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         ...c,
+        ...v,
         // ----- admin console (MD3-flavoured tokens) -----
          primary: c.ink, "primary-container": c["ink-2"],
         "primary-fixed": "#FBE3E3", "primary-fixed-dim": "#EF6B6B", "on-primary": "#ffffff",
@@ -42,7 +60,8 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["Inter", "system-ui", "sans-serif"],           // labels are Inter in this system
+        mono: ["Inter", "system-ui", "sans-serif"],
+        display: ['"Archivo"', "Inter", "system-ui", "sans-serif"],   // set wide via font-stretch
         serif: ['"Cormorant Garamond"', "Georgia", "serif"],   // quotes only
       },
       letterSpacing: { widest: "0.25em", ultra: "0.3em" },

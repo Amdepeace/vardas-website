@@ -1,120 +1,94 @@
-import { useState } from "react";
-import { CTA, Hero, Kicker, Placeholder, Row, SectionHead, Stat } from "../components/primitives";
-import { POLICIES, VENUE, ZONES } from "../data/venue";
-import places from "../data/places.json";
+import { Link } from "react-router-dom";
+import { Button, EventCard, Heading, InstagramEmbed, Label, Section, VideoHero } from "../components/vx";
+import { VENUES } from "../data/site";
+import { useEvents } from "../lib/events";
+import { waLink } from "../lib/contact";
 
-const facts = places.vardas_facts;
-const FILTERS = [["all", "All"], ["terrace", "Terrace"], ["lounge", "Lounge"], ["club-floor", "Club"], ["private-1", "Private"]];
-
-export function HomePage({ onNavigate, onReserve }) {
-  const [filter, setFilter] = useState("all");
-  const zones = ZONES.filter((z) => filter === "all" || z.id === filter);
+function VenueCard({ v, cta }) {
   return (
-    <div className="page-enter page-enter-active">
-      {/* HERO — split, like the reference */}
-      <Hero tall kicker="Est. Bole · Africa Avenue · 5th floor" title="Fifth" outline="floor." em="Your terms."
-        intro="Kitchen, terrace, hookah, live music and DJs above Africa Avenue — with every price published, smoke-free rooms, and a safe ride home."
-        rows={[{ k: "Business lunch", v: "Mon – Fri · 12:00" }, { k: "Dinner & terrace", v: "Daily · 18:00" }, { k: "Club", v: "Thu – Sat · 22:00" }, { k: "Private hire", v: "4 zones · 24 – 200" }]}
-        label="Home hero · terrace at dusk" caption="Getu Commercial Building · Bole">
-        <CTA variant="solid" onClick={() => onReserve()}>Reserve a table →</CTA>
-        <CTA variant="ghost" onClick={() => onNavigate("menu")}>See the menu &amp; prices</CTA>
-      </Hero>
+    <Link to={v.path} className="group relative block overflow-hidden aspect-[4/5] sm:aspect-[16/12] lg:aspect-[4/5] border border-edge vx-focus">
+      <img src={v.card || v.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+      <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-night/10" />
+      <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
+        <p className="vx-label text-gold">{v.kind}</p>
+        <h3 className="vx-display text-[2.4rem] sm:text-[3.2rem] text-cream mt-3">{v.name}</h3>
+        <p className="text-mute mt-3 max-w-sm">{v.tagline}</p>
+        <span className="inline-flex items-center gap-3 mt-7 vx-label text-cream group-hover:text-gold transition-colors">{cta} <span className="w-10 h-px bg-current transition-all group-hover:w-16" /></span>
+      </div>
+    </Link>
+  );
+}
 
-      {/* ABOUT + STATS */}
-      <section id="about" className="density-sect px-6 md:px-10 grid md:grid-cols-2 gap-16 items-start">
-        <div>
-          <SectionHead kicker="About" title="One address." outline="Three nights." />
-          <p className="text-[0.82rem] leading-[1.95] text-grey-1 mb-6">
-            <strong>Vardas</strong> is a restaurant and lounge, a club, and a professional venue on the fifth floor of the Getu Commercial Building. International and Ethiopian kitchen, a terrace over Africa Avenue, live music and DJs from Thursday to Saturday.
-          </p>
-          <p className="text-[0.82rem] leading-[1.95] text-grey-1">
-            Reviews praised the room, the music and the food — and criticised the pressure to buy bottles, the smoke, and the service. <strong>We wrote it down and changed it, in public.</strong>
-          </p>
-          <div className="grid-hair grid-cols-3 mt-8">
-            <Stat num="5" sup="F" label="Floor · Africa Ave" />
-            <Stat num={ZONES.length} label="Zones · 360° toured" />
-            <Stat num="2,355" sup="m" label="Altitude · water free" />
+export function HomePage() {
+  const { events } = useEvents();
+  return (
+    <div>
+      <VideoHero label="Vardas Entertainment">
+        <img src="/brand/vardas-logo.png" alt="Vardas" className="w-[240px] sm:w-[340px] h-auto drop-shadow-[0_8px_40px_rgba(226,169,59,.35)]" />
+        <p className="vx-display-light text-cream/90 text-sm sm:text-base mt-10">Addis Ababa</p>
+        <div className="gold-rule w-40 my-6" />
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button to="/vardas/tables">Book a VIP table</Button>
+          <Button to="/venue/enquire" variant="ghost">Plan an event</Button>
+        </div>
+        <a href="#venues" className="absolute bottom-8 left-1/2 -translate-x-1/2 vx-label !text-[0.58rem] text-mute hover:text-gold flex flex-col items-center gap-3">Scroll<span className="w-px h-10 bg-gradient-to-b from-gold to-transparent" /></a>
+      </VideoHero>
+
+      <Section id="venues" className="!pt-24">
+        <Heading center label="Two rooms, one name" title="Choose your" gold="night" />
+        <div className="grid lg:grid-cols-2 gap-5 mt-14">
+          <VenueCard v={VENUES.vardas} cta="Enter Vardas" />
+          <VenueCard v={VENUES.venue} cta="Explore Vardas Venue" />
+        </div>
+      </Section>
+
+      <Section tone="raised">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <Heading label="At Vardas" title="Upcoming" gold="nights" />
+          <Button to="/vardas/events" variant="outline">All events</Button>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">{events.slice(0, 3).map((e) => <EventCard key={e.slug} e={e} />)}</div>
+      </Section>
+
+      <section className="relative overflow-hidden bg-night">
+        <img src="/gallery/vardas-night-18.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-r from-night via-night/85 to-night/30" />
+        <div className="relative max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-14 py-24 md:py-32 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <Label>VIP tables</Label>
+            <h2 className="vx-display text-[2rem] sm:text-[3rem] text-cream mt-4">Your table, <span className="gold-text">held.</span></h2>
+            <p className="text-mute mt-6 max-w-md leading-[1.9]">Club floor, lounge, terrace or the private room. Tell us the night and the party size — a host confirms by phone with the zone, any minimum and your arrival time. Bottle service only when you ask.</p>
+            <div className="flex flex-wrap gap-3 mt-9"><Button to="/vardas/tables">Request a table</Button><Button href={waLink("Hi Vardas, I'd like to book a VIP table for ")} target="_blank" variant="ghost">WhatsApp a host</Button></div>
           </div>
-        </div>
-        <div className="relative">
-          <Placeholder label="Lounge interior" aspect="3/4" />
-          <div className="absolute -bottom-px left-0 right-0 bg-ink px-5 py-4 flex justify-between items-center">
-            <span className="label text-grey-2 !tracking-[0.2em] !font-normal">Every price published</span>
-            <strong className="label text-paper !tracking-[0.15em] !text-[0.7rem]">Your night, your terms</strong>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES — dark numbered rows */}
-      <section id="faces" className="bg-ink text-paper density-sect px-6 md:px-10">
-        <SectionHead inverse kicker="What we do" title="Three" outline="faces." />
-        <div className="-mt-4 flex flex-col">
-          <Row index={1} title="Restaurant & lounge" tag="Kitchen · terrace · hookah · business lunch" onClick={() => onNavigate("menu")} />
-          <Row index={2} title="Club" tag="DJs & live music · Thu – Sat · smoke-free floor" onClick={() => onNavigate("club")} />
-          <Row index={3} title="Events & private hire" tag="Launches · birthdays · corporate · 24 – 200 guests" onClick={() => onNavigate("hire")} />
-          <Row index={4} title="Artists & promoters" tag="Play the fifth floor · co-hosted nights" onClick={() => onNavigate("artists")} />
-        </div>
-      </section>
-
-      {/* WORK GRID — zones with filter */}
-      <section id="zones" className="density-sect px-6 md:px-10 !pb-8">
-        <SectionHead kicker="The rooms" title="Four" outline="zones." intro="Every zone has a 360° tour, a published capacity, and — where one applies — a published minimum. No surprises at the door." />
-        <div className="inline-flex border border-line mb-8">
-          {FILTERS.map(([id, l]) => (
-            <button key={id} onClick={() => setFilter(id)} className={`px-[1.4rem] py-[0.65rem] text-[0.62rem] font-medium tracking-[0.1em] uppercase border-r border-line last:border-r-0 transition-colors ${filter === id ? "bg-ink text-paper" : "text-grey-2 hover:text-ink"}`}>{l}</button>
-          ))}
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-[3px] bg-surface">
-          {zones.map((z, i) => (
-            <button key={z.id} onClick={() => onNavigate("tours")} className={`group text-left bg-paper ${filter === "all" && i === 0 ? "lg:col-span-2" : ""}`}>
-              <Placeholder label={`${z.title} · 360°`} aspect={filter === "all" && i === 0 ? "16/9" : "4/3"} />
-              <div className="p-4 border-t border-line-2">
-                <p className="label text-red !tracking-[0.2em] !text-[0.55rem] mb-1">{z.smoking ? "Smoking · marked areas" : "Smoke-free"} · up to {z.capacity}</p>
-                <p className="text-[0.88rem] font-medium text-ink tracking-[0.03em]">{z.title}</p>
-                <p className="text-[0.65rem] text-grey-3 mt-1">{z.blurb}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTIMONIAL-STYLE — they said / we do */}
-      <section id="terms" className="bg-ink density-sect px-6 md:px-10">
-        <SectionHead inverse kicker="Your night, your terms" title="They said." red="We do." />
-        <div className="grid md:grid-cols-2 gap-8">
-          {POLICIES.filter((p) => p.answers).map((p) => (
-            <div key={p.slug} className="bg-[#111] p-10 relative">
-              <span className="block font-serif text-[5rem] leading-[0.8] text-red opacity-40 mb-4">"</span>
-              <p className="font-serif italic text-[1.15rem] leading-[1.7] text-quote mb-6">{p.answers}</p>
-              <div className="flex items-center gap-4">
-                <span className="w-10 h-10 rounded-full bg-[#222] flex items-center justify-center text-red text-sm">✓</span>
-                <div><p className="label text-paper !tracking-[0.1em] !text-[0.7rem]">{p.title}</p><p className="text-[0.6rem] text-grey-1 mt-1 tracking-[0.08em] max-w-sm">{p.body}</p></div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10"><CTA variant="ghost-light" onClick={() => onNavigate("your-terms")}>Read the full pledge →</CTA></div>
-      </section>
-
-      {/* TALK */}
-      <section id="reserve" className="density-sect px-6 md:px-10 grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="font-display text-[3rem] md:text-[4rem] text-ink">Let's <span className="outline-text">talk</span><br /><span className="text-red">tonight.</span></h2>
-          <div className="red-line my-6" />
-          <p className="text-[0.82rem] leading-[1.95] text-grey-1 max-w-sm">WhatsApp is fastest and a person answers. Or reserve here — no deposit, no minimum unless the zone shows one, and a ride home if you want it.</p>
-          <div className="flex flex-col gap-2.5 mt-8">
-            {[["WhatsApp", VENUE.whatsapp], ["Getting here", VENUE.address.split(",")[0] + ", Africa Avenue"], ["Spend", facts.spend_range_etb ? `ETB ${facts.spend_range_etb[0].toLocaleString()} – ${facts.spend_range_etb[1].toLocaleString()} · every price on the menu` : "Every price on the menu"]].map(([k, v]) => (
-              <span key={k} className="inline-flex items-center gap-3 px-5 py-3 border-[1.5px] border-line text-[0.65rem] tracking-[0.12em] uppercase text-grey-1 max-w-fit hover:border-red hover:text-red transition-colors"><span className="w-2 h-2 rounded-full bg-red" />{k} · <span className="normal-case tracking-normal">{v}</span></span>
+          <ul className="grid grid-cols-2 gap-px bg-edge border border-edge">
+            {[["Club floor", "6 – 12 guests"], ["Lounge", "4 – 10 guests"], ["Terrace", "4 – 8 guests"], ["Private room", "up to 24"]].map(([z, s]) => (
+              <li key={z} className="bg-night/90 p-6"><p className="vx-display text-lg text-cream">{z}</p><p className="text-sm text-mute mt-2">{s}</p></li>
             ))}
-          </div>
-        </div>
-        <div className="bg-paper-2 border border-line p-8">
-          <Kicker>Reserve</Kicker>
-          <p className="font-display text-2xl mt-3 text-ink">A table on your terms</p>
-          <p className="text-[0.75rem] leading-[1.9] text-grey-1 mt-3">Lunch, dinner or the club. Pick a zone, tell us the party size, tick "ride home" if you'd like one.</p>
-          <CTA variant="solid" className="mt-6 w-full" onClick={() => onReserve()}>Open the reservation form →</CTA>
+          </ul>
         </div>
       </section>
+
+      <Section>
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5">
+            <Label>Vardas Venue</Label>
+            <h2 className="vx-display text-[2rem] sm:text-[3rem] text-cream mt-4">Built for the <span className="gold-text">big night.</span></h2>
+            <ul className="mt-8 border-t border-edge">
+              {VENUES.venue.offerings.map(([t]) => <li key={t} className="border-b border-edge py-4 flex justify-between items-center"><span className="text-cream">{t}</span><span className="text-gold">→</span></li>)}
+            </ul>
+            <div className="mt-9"><Button to="/venue/enquire">Plan your event</Button></div>
+          </div>
+          <div className="lg:col-span-7"><img src="/brand/vardas-venue-wordmark.jpg" alt="Vardas Venue" loading="lazy" className="w-full border border-edge" /></div>
+        </div>
+      </Section>
+
+      <Section tone="raised">
+        <Heading center label="Follow the nights" title="On" gold="Instagram" />
+        <div className="grid md:grid-cols-2 gap-5 mt-12">
+          <InstagramEmbed handle={VENUES.vardas.instagram.handle} url={VENUES.vardas.instagram.url} title="Vardas — lounge & club" />
+          <InstagramEmbed handle={VENUES.venue.instagram.handle} url={VENUES.venue.instagram.url} title="Vardas Venue — events" />
+        </div>
+      </Section>
     </div>
   );
 }

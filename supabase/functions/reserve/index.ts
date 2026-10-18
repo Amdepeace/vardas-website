@@ -6,6 +6,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { z } from "npm:zod@3";
 import { corsHeaders, json } from "../_shared/cors.ts";
 import { rateLimit } from "../_shared/ratelimit.ts";
+import { notify } from "../_shared/mail.ts";
 
 const Body = z.object({
   guest_name: z.string().min(2).max(80),
@@ -42,5 +43,7 @@ Deno.serve(async (req) => {
     console.error(error);
     return json({ error: "could not create reservation" }, 500);
   }
+  await notify(`VIP table request — ${new Date(b.starts_at).toLocaleString("en-GB", { timeZone: "Africa/Addis_Ababa" })} · ${b.party_size} guests`,
+    { Ref: data.ref, Name: b.guest_name, Phone: b.phone, Email: b.email, Service: b.service, Zone: b.zone_id, "Party size": b.party_size, "Ride home": b.ride_home_requested ? "Yes" : "No", Notes: b.notes }, b.email);
   return json({ ok: true, reservation: data });
 });

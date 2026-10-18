@@ -5,7 +5,7 @@
 @layer base {
   :root { --accent: #e84040; }
   html { scroll-behavior: smooth; }
-  html, body { background: #f8f8f6; color: #0a0a0a; }
+  html, body { background: #070605; color: #f4eee4; }
   body { overflow-x: hidden; font-weight: 300; }
   strong, b { font-weight: 600; color: #0a0a0a; }
 }
@@ -74,6 +74,29 @@
   .display { font-family: Inter, system-ui, sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; }
   .text-label-caps { font-size: 12px; line-height: 16px; letter-spacing: 0.15em; font-weight: 600; }
   .text-cta-label { font-size: 14px; line-height: 20px; letter-spacing: 0.05em; font-weight: 500; }
+}
+
+/* ---------- Vardas Entertainment (dark + gold) ---------- */
+@layer components {
+  .vx-display { font-family: Archivo, Inter, system-ui, sans-serif; font-stretch: 125%; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.98; }
+  .vx-display-light { font-family: Archivo, Inter, system-ui, sans-serif; font-stretch: 125%; font-weight: 300; text-transform: uppercase; letter-spacing: 0.06em; }
+  .vx-label { font-family: Inter, system-ui, sans-serif; font-size: 0.66rem; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; }
+  .gold-text { background: linear-gradient(100deg, #f0a818 0%, #f3cd76 38%, #e2a93b 62%, #a8622a 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .gold-fill { background: linear-gradient(100deg, #f0a818 0%, #f3cd76 40%, #e2a93b 65%, #b8742c 100%); }
+  .gold-rule { height: 1px; background: linear-gradient(90deg, transparent, #e2a93b 20%, #f3cd76 50%, #e2a93b 80%, transparent); }
+  .vx-field {
+    width: 100%; background: #15120e; border: 1px solid #2a231b; color: #f4eee4; padding: 0.85rem 1rem;
+    font: 300 0.9rem/1.4 Inter, system-ui, sans-serif; border-radius: 0; transition: border-color .2s ease;
+  }
+  .vx-field:focus { outline: none; border-color: #e2a93b; }
+  .vx-field::placeholder { color: #6f675c; }
+  select.vx-field { appearance: none; -webkit-appearance: none; padding-right: 2.2rem;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23E2A93B' fill='none' stroke-width='1.2' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat; background-position: right 0.9rem center; }
+  input.vx-field[type="date"], input.vx-field[type="time"] { color-scheme: dark; }
+  .vx-focus:focus-visible, .vx-nav a:focus-visible, .vx-nav button:focus-visible { outline: 2px solid #e2a93b; outline-offset: 3px; }
+  .vx-grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 }
 
 @layer utilities {

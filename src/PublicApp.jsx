@@ -1,63 +1,71 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { Footer, NAV_ITEMS, TopNav, pathToId } from "./components/Shell";
-import { ReservationModal, Toast } from "./components/ReservationModal";
-import { HostWidget } from "./components/HostWidget";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Footer, TopNav } from "./components/Shell";
+import { SupportDock } from "./components/SupportDock";
+import { Toast } from "./components/vx";
 import { HomePage } from "./pages/HomePage";
-import { MenuPage } from "./pages/MenuPage";
-import { ClubPage } from "./pages/ClubPage";
+import { VardasPage } from "./pages/VardasPage";
 import { EventsPage } from "./pages/EventsPage";
-import { HirePage } from "./pages/HirePage";
-import { ToursPage } from "./pages/ToursPage";
+import { TablesPage } from "./pages/TablesPage";
+import { MenuPage } from "./pages/MenuPage";
 import { GettingHerePage } from "./pages/GettingHerePage";
 import { YourTermsPage } from "./pages/YourTermsPage";
-import { ArtistsPage } from "./pages/ArtistsPage";
-import { CareersPage } from "./pages/CareersPage";
+import { FaqPage } from "./pages/FaqPage";
+import { VenuePage } from "./pages/VenuePage";
+import { VenueEnquirePage } from "./pages/VenueEnquirePage";
+import { GalleryPage } from "./pages/GalleryPage";
 import { ContactPage } from "./pages/ContactPage";
+import { WorkWithUsPage } from "./pages/WorkWithUsPage";
+
+const TITLES = {
+  "/": "Vardas Entertainment — Vardas · Vardas Venue · Addis Ababa",
+  "/vardas": "Vardas — Lounge & Club · Bole", "/vardas/events": "Events — Vardas", "/vardas/tables": "VIP tables — Vardas",
+  "/vardas/menu": "Menu & prices — Vardas", "/vardas/getting-here": "Getting here — Vardas", "/vardas/your-terms": "Your terms — Vardas", "/vardas/faq": "FAQ — Vardas",
+  "/venue": "Vardas Venue — Premium event space", "/venue/enquire": "Plan your event — Vardas Venue",
+  "/gallery": "Gallery — Vardas Entertainment", "/contact": "Contact — Vardas Entertainment", "/work-with-us": "Work with us — Vardas Entertainment",
+};
 
 export default function PublicApp() {
-  const location = useLocation();
-  const nav = useNavigate();
-  const active = pathToId(location.pathname);
-
-  useEffect(() => { document.body.setAttribute("data-density", "spacious"); }, []);
-  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [location.pathname]);
-
-  function navigate(id) {
-    const item = NAV_ITEMS.find((n) => n.id === id);
-    nav(item ? item.path : "/");
-  }
-
-  const [modal, setModal] = useState({ open: false, prefill: null });
+  const { pathname } = useLocation();
   const [toast, setToast] = useState("");
-  const openReserve = (prefill) => setModal({ open: true, prefill: prefill || null });
-  const props = { onNavigate: navigate, onReserve: openReserve, onToast: setToast };
-
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); document.title = TITLES[pathname] || "Vardas Entertainment"; }, [pathname]);
+  const p = { onToast: setToast };
   return (
-    <div className="min-h-screen bg-paper">
-      <TopNav active={active} onNavigate={navigate} onReserve={() => openReserve()} />
-      <main className="pt-[70px]">
+    <div className="min-h-screen bg-night text-cream">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] gold-fill text-night px-4 py-2">Skip to content</a>
+      <TopNav />
+      <main id="main">
         <Routes>
-          <Route path="/" element={<HomePage {...props} />} />
-          <Route path="/menu" element={<MenuPage {...props} />} />
-          <Route path="/club" element={<ClubPage {...props} />} />
-          <Route path="/events" element={<EventsPage {...props} />} />
-          <Route path="/events/:slug" element={<EventsPage {...props} />} />
-          <Route path="/hire" element={<HirePage {...props} />} />
-          <Route path="/tours" element={<ToursPage {...props} />} />
-          <Route path="/tours/:slug" element={<ToursPage {...props} />} />
-          <Route path="/getting-here" element={<GettingHerePage {...props} />} />
-          <Route path="/your-terms" element={<YourTermsPage {...props} />} />
-          <Route path="/artists" element={<ArtistsPage {...props} />} />
-          <Route path="/careers" element={<CareersPage {...props} />} />
-          <Route path="/contact" element={<ContactPage {...props} />} />
+          <Route path="/" element={<HomePage {...p} />} />
+          <Route path="/vardas" element={<VardasPage {...p} />} />
+          <Route path="/vardas/events" element={<EventsPage {...p} />} />
+          <Route path="/vardas/events/:slug" element={<EventsPage {...p} />} />
+          <Route path="/vardas/tables" element={<TablesPage {...p} />} />
+          <Route path="/vardas/menu" element={<MenuPage {...p} />} />
+          <Route path="/vardas/getting-here" element={<GettingHerePage {...p} />} />
+          <Route path="/vardas/your-terms" element={<YourTermsPage {...p} />} />
+          <Route path="/vardas/faq" element={<FaqPage {...p} />} />
+          <Route path="/venue" element={<VenuePage {...p} />} />
+          <Route path="/venue/enquire" element={<VenueEnquirePage {...p} />} />
+          <Route path="/gallery" element={<GalleryPage {...p} />} />
+          <Route path="/contact" element={<ContactPage {...p} />} />
+          <Route path="/work-with-us" element={<WorkWithUsPage {...p} />} />
+          {/* old MVP routes */}
+          <Route path="/menu" element={<Navigate to="/vardas/menu" replace />} />
+          <Route path="/club" element={<Navigate to="/vardas" replace />} />
+          <Route path="/events" element={<Navigate to="/vardas/events" replace />} />
+          <Route path="/hire" element={<Navigate to="/venue/enquire" replace />} />
+          <Route path="/tours" element={<Navigate to="/venue" replace />} />
+          <Route path="/getting-here" element={<Navigate to="/vardas/getting-here" replace />} />
+          <Route path="/your-terms" element={<Navigate to="/vardas/your-terms" replace />} />
+          <Route path="/artists" element={<Navigate to="/work-with-us" replace />} />
+          <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <Footer onNavigate={navigate} />
       </main>
-      <ReservationModal open={modal.open} prefill={modal.prefill} onClose={() => setModal({ open: false, prefill: null })} onConfirm={() => setToast("Reservation request received")} />
+      <Footer onToast={setToast} />
+      <SupportDock />
       <Toast message={toast} onDone={() => setToast("")} />
-      <HostWidget />
     </div>
   );
 }

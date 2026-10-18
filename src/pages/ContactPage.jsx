@@ -1,17 +1,47 @@
-import { CTA, Hero, Kicker } from "../components/primitives";
-import { VENUE } from "../data/venue";
+import { Heading, PageHero, Section } from "../components/vx";
+import { RequestForm } from "../components/RequestForm";
+import { SITE, VENUES } from "../data/site";
+import { tgLink, waLink } from "../lib/contact";
 
-export function ContactPage({ onReserve, onNavigate }) {
+export function ContactPage({ onToast }) {
+  const channels = [
+    ["WhatsApp", "Fastest — a host replies", waLink("Hi Vardas, "), "bg-wa text-night"],
+    ["Telegram", "Same team, same number", tgLink(), "bg-tg text-white"],
+    ["Email", SITE.email, `mailto:${SITE.email}`, "gold-fill text-night"],
+    ["Call", SITE.phoneDisplay, `tel:${SITE.phoneE164}`, "bg-night-3 text-cream border border-edge"],
+  ];
   return (
-    <div className="page-enter page-enter-active">
-      <Hero kicker="Contact" title="Talk to" em="a person." label="Contact hero · host desk"
-        intro="WhatsApp is fastest. Every message is answered by the floor team, not a bot — unless you ask our host Selam, who says so." />
-      <section className="density-sect max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 grid md:grid-cols-3 gap-10">
-        <div><Kicker>WhatsApp & phone</Kicker><p className="font-mono text-lg text-ink mt-4">{VENUE.whatsapp}</p><p className="text-sm text-grey-1 mt-2">Reservations, rides home, feedback.</p></div>
-        <div><Kicker>Hours</Kicker><ul className="mt-4 space-y-2 text-sm text-grey-1">{VENUE.hours.map((h) => <li key={h.label}><b className="text-ink">{h.label}</b><br />{h.time}</li>)}</ul></div>
-        <div><Kicker>Address</Kicker><p className="mt-4 text-sm text-grey-1 leading-relaxed">{VENUE.address}</p><button onClick={() => onNavigate("getting-here")} className="mt-3 label !tracking-[0.2em] text-red hover:text-ink">Getting here →</button></div>
-        <div className="md:col-span-3 flex flex-wrap gap-3 pt-6 border-t border-line"><CTA variant="brass" onClick={() => onReserve()}>Reserve a table</CTA><CTA variant="ghost" onClick={() => onNavigate("hire")}>Enquire about private hire</CTA></div>
-      </section>
+    <div>
+      <PageHero image="/gallery/vardas-night-6.jpg" label="Contact" title="Talk to" gold="Vardas" intro="Tables, events, press, partnerships — every message reaches the same team." />
+      <Section>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {channels.map(([t, d, href, cls]) => (
+            <a key={t} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="group vx-focus block bg-night-2 border border-edge p-7 hover:border-gold/60 transition-colors">
+              <span className={`inline-block vx-label !text-[0.58rem] px-3 py-2 ${cls}`}>{t}</span>
+              <p className="text-cream mt-5 break-words">{d}</p>
+              <p className="text-gold text-sm mt-4">Open →</p>
+            </a>
+          ))}
+        </div>
+        <div className="grid lg:grid-cols-12 gap-14 mt-20">
+          <div className="lg:col-span-4 space-y-10">
+            {[VENUES.vardas, VENUES.venue].map((v) => <div key={v.id}><p className="vx-display text-lg gold-text">{v.name}</p><p className="text-sm text-mute mt-3 leading-relaxed">{v.address}</p></div>)}
+          </div>
+          <div className="lg:col-span-8">
+            <Heading title="Send a" gold="message" className="mb-8" />
+            <RequestForm onToast={onToast} cta="Send message →" doneTitle="Message received"
+              initial={{ topic: "general", name: "", phone: "", email: "", message: "" }}
+              fields={[
+                { name: "topic", label: "Topic", type: "select", wide: true, options: [["general", "General question"], ["tables", "Tables & guest list"], ["venue", "Vardas Venue event"], ["press", "Press & partnerships"], ["feedback", "Feedback"]] },
+                { name: "name", label: "Name", required: true },
+                { name: "phone", label: "Phone (WhatsApp)", type: "tel", placeholder: "+251 9…" },
+                { name: "email", label: "Email", type: "email", wide: true, required: true },
+                { name: "message", label: "Message", type: "textarea", wide: true, required: true },
+              ]}
+              build={(f) => ({ fn: "enquire", payload: { kind: "contact", topic: f.topic, name: f.name, phone: f.phone || undefined, email: f.email, message: f.message }, subject: `Website message — ${f.topic}`, summary: { Topic: f.topic, Name: f.name, Phone: f.phone, Email: f.email, Message: f.message } })} />
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }

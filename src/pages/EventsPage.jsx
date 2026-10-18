@@ -1,50 +1,38 @@
-import { useEffect, useState } from "react";
-import { CTA, Hero, Placeholder, Price } from "../components/primitives";
-import { backendReady } from "../lib/api";
-import { supabase } from "../lib/supabase";
+import { useParams, Navigate } from "react-router-dom";
+import { Button, EventCard, Heading, Label, PageHero, Section } from "../components/vx";
+import { useEvents } from "../lib/events";
+import { waLink } from "../lib/contact";
 
-// Starter calendar, shown until published events exist in Supabase.
-const STARTER = [
-  { slug: "thursday-live", title: "Live Thursdays", kind: "live-music", when: "Every Thursday · 21:00", lineup: "Rotating Ethio-jazz and soul sets", cover: 0, dress: "Smart casual" },
-  { slug: "friday-club", title: "Fifth Floor Fridays", kind: "club-night", when: "Every Friday · 22:00 – late", lineup: "Resident DJs · Afrobeats, amapiano, house", cover: null, dress: "Smart · no sportswear" },
-  { slug: "saturday-club", title: "Saturday Sessions", kind: "club-night", when: "Every Saturday · 22:00 – late", lineup: "Guest DJ announced weekly", cover: null, dress: "Smart" },
-  { slug: "business-lunch", title: "Business Lunch", kind: "brunch", when: "Mon – Fri · 12:00 – 15:00", lineup: "Two-course set menu · quiet lounge · WiFi", cover: 0, dress: "—" },
-];
-
-const fmt = (iso) => new Date(iso).toLocaleString("en-GB", { weekday: "long", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
-
-export function EventsPage({ onReserve }) {
-  const [live, setLive] = useState(null);
-  useEffect(() => {
-    if (!backendReady) { setLive([]); return; }
-    supabase.from("events").select("*").eq("published", true).gte("starts_at", new Date(Date.now() - 6 * 3600e3).toISOString()).order("starts_at").limit(20)
-      .then(({ data }) => setLive((data || []).map((e) => ({ slug: e.slug, title: e.title, kind: e.kind, when: fmt(e.starts_at), lineup: (e.lineup || []).join(" · "), cover: e.cover_etb ?? 0, dress: e.dress_code || "—" }))));
-  }, []);
-  const EVENTS = live && live.length ? live : STARTER;
+export function EventsPage() {
+  const { slug } = useParams();
+  const { events, live } = useEvents();
+  if (slug) {
+    const e = events.find((x) => x.slug === slug);
+    if (!e) return <Navigate to="/vardas/events" replace />;
+    return (
+      <div>
+        <PageHero image={e.image} label={`${e.kind} · ${e.date.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })} · ${e.time}`} title={e.title} intro={e.lineup.join(" · ")}>
+          <Button to={`/vardas/tables?event=${e.slug}`}>Book a table for this night</Button>
+          <Button href={waLink(`Hi Vardas, I'm coming to ${e.title} on ${e.date.toDateString()}.`)} target="_blank" variant="ghost">Ask on WhatsApp</Button>
+        </PageHero>
+        <Section>
+          <dl className="grid sm:grid-cols-3 gap-px bg-edge border border-edge">
+            {[["Doors", e.time], ["Cover", e.cover === null ? "Announced weekly" : e.cover === 0 ? "No cover" : `ETB ${e.cover}`], ["Dress", e.dress]].map(([k, v]) => (
+              <div key={k} className="bg-night p-8"><dt className="vx-label text-gold">{k}</dt><dd className="vx-display text-xl text-cream mt-3">{v}</dd></div>
+            ))}
+          </dl>
+          <p className="text-sm text-mute mt-8 max-w-2xl">Valid ID required. If a cover isn't listed here, it isn't charged at the door. Tables are confirmed by a host by phone.</p>
+        </Section>
+      </div>
+    );
+  }
   return (
-    <div className="page-enter page-enter-active">
-      <Hero kicker="Events" title="What's on" em="this week." label="Events hero · live set"
-        intro="Cover, lineup and dress code are published for every night. Cover is never charged at the door if it isn't listed here." />
-      <section className="density-sect max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
-        <ul className="divide-y divide-line border-y border-line">
-          {EVENTS.map((e) => (
-            <li key={e.slug} className="py-8 grid md:grid-cols-[200px,1fr,auto] gap-6 items-center">
-              <Placeholder label={e.title} aspect="4/3" />
-              <div>
-                <p className="label !tracking-[0.2em] text-red">{e.when}</p>
-                <h2 className="font-display text-3xl text-ink mt-1">{e.title}</h2>
-                <p className="text-sm text-grey-1 mt-2">{e.lineup}</p>
-                <p className="label !tracking-[0.16em] text-grey-2 mt-3">Dress · {e.dress}</p>
-              </div>
-              <div className="flex flex-col items-start md:items-end gap-3">
-                <Price>{e.cover === null ? "Cover announced weekly" : e.cover === 0 ? "No cover" : `Cover ETB ${e.cover}`}</Price>
-                <CTA variant="ghost" onClick={() => onReserve({ service: e.kind === "brunch" ? "lunch" : e.kind === "club-night" ? "club" : "dinner" })}>Reserve</CTA>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-8 text-[12px] text-grey-2">Starter calendar. Published events replace this list once entered in the admin console.</p>
-      </section>
+    <div>
+      <PageHero label="Vardas · programme" title="Upcoming" gold="events" intro="Live sets, resident DJs and guest nights on the fifth floor. Cover, lineup and dress code are published for every night." />
+      <Section>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">{events.map((e) => <EventCard key={e.slug + e.date} e={e} />)}</div>
+        {!live && <p className="text-xs text-mute-2 mt-8">Weekly programme shown. Specific nights and guest DJs appear here as they're announced.</p>}
+      </Section>
     </div>
   );
 }

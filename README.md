@@ -1,7 +1,18 @@
-# Vardas — website
+# Vardas Entertainment — vardasentertainment.com
 
-Bar, restaurant and club on the 5th floor of the Getu Commercial Building, Africa Avenue, Bole, Addis Ababa.
-Vite + React 18 + Tailwind + Supabase. Product requirements and roadmap: [`docs/PRD.md`](docs/PRD.md).
+One site for **Vardas** (lounge & club, 5th floor Getu Commercial Building, Bole) and **Vardas Venue** (premium event space), Addis Ababa.
+Vite + React 18 + Tailwind + Supabase. Clean-room rebuild of the multi-venue nightclub pattern — recon in [`replica/`](replica/recon.md).
+
+### What's on the site
+- Cinematic video hero (`public/media/vardas-hero*.mp4` — swap in new footage, same names), logo and imagery in `public/brand`, `public/gallery`
+- Top nav with **Vardas ▾** and **Vardas Venue ▾** dropdowns; mobile drawer
+- Events + event pages, **VIP table requests**, **Vardas Venue enquiries** (corporate / private / concert / wedding), gallery with lightbox, FAQ, menu, getting here, contact, work with us
+- **Floating WhatsApp + Telegram support** (+251 911 522 856) with quick topics, email and call
+- **Instagram embeds**: @vardaslounge and @vardas_venue
+- **Mailbox**: every form reaches **vardasvenue@gmail.com** — through Edge Functions + Resend when configured, otherwise by opening the guest's mail app pre-addressed
+- 360° slot on the Venue page: give `<Tour360 matterportId="…" />` a Matterport model id to go live
+
+Edit venues, phone, email, nav, events, FAQ and gallery in **`src/data/site.js`**.
 
 ## Run
 
@@ -21,10 +32,11 @@ supabase/migrations/0001_initial.sql        # staff_roles + is_staff() (hotel ta
 supabase/migrations/0002_vardas_core.sql    # menu, policies, zones, reservations, events, hire, artists, places, rides, advisories, tours, careers
 supabase/migrations/0003_rate_limit.sql     # counters for Edge Functions
 supabase/migrations/0004_retire_hotel_tables.sql  # drops the old hotel tables (destructive)
+supabase/migrations/0005_vardas_entertainment.sql # contact messages, newsletter, venue on enquiries
 supabase/seed_vardas.sql                    # places from src/data/places.json, starter zones/sections/policies
 ```
 
-Edge Functions (`supabase/functions/`): `reserve`, `enquire`, `host` — see the README there for secrets and deploy commands.
+Edge Functions (`supabase/functions/`): `reserve`, `enquire`, `host` — set `RESEND_API_KEY` to email vardasvenue@gmail.com — see the README there for secrets and deploy commands.
 
 **Staff console** at `/admin` (Supabase Auth; a row in `staff_roles` grants access): Tables · Menu & prices · Events · Enquiries.
 

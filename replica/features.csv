@@ -1,0 +1,35 @@
+feature,area,priority,original,clone,notes
+Full-bleed cinematic video hero with poster fallback,home,must,yes,yes,client clip rotated to landscape; 4.7 MB desktop / 2.4 MB mobile
+Top nav with per-venue dropdowns (city switcher pattern),nav,must,yes,yes,Vardas ▾ and Vardas Venue ▾
+Transparent nav over hero that turns solid on scroll,nav,must,yes,yes,
+Mobile nav drawer with both venues,nav,must,yes,yes,
+Venue chooser cards on home,home,must,yes,yes,
+Per-venue landing page,venue,must,yes,yes,/vardas and /venue
+Upcoming events strip and list,events,must,yes,yes,reads Supabase events; starter list otherwise
+Event detail page,events,must,yes,yes,/vardas/events/:slug
+VIP table request form,tables,must,yes,yes,emails vardasvenue@gmail.com
+Private event enquiry (corporate / wedding / concert / party),private events,must,yes,yes,emails vardasvenue@gmail.com
+FAQ (dress code / ID / minimums),info,must,yes,yes,
+Contact page with all channels,contact,must,yes,yes,
+Floating WhatsApp support,support,must,no,yes,client requirement; +251 911 522 856
+Floating Telegram support,support,must,no,yes,client requirement
+Mailbox integration (forms to vardasvenue@gmail.com),integrations,must,yes,yes,Edge Functions + Resend when configured; mailto to the inbox otherwise
+Instagram embeds for both accounts,social,must,yes,yes,profile iframes + branded fallback; not verifiable from build sandbox (instagram.com blocked)
+Gallery filterable by venue with lightbox,gallery,should,yes,yes,
+Newsletter signup,marketing,should,yes,yes,
+Special-events / programme hub,events,should,yes,partial,weekly programme + per-event pages; no multi-night hub yet
+Directions / getting here,info,should,yes,yes,reuses places.json
+360° / Matterport slot on venue page,venue,should,no,yes,pass matterportId to <Tour360> to go live
+Menu with published prices,info,should,no,yes,from previous MVP
+Trust pledge page,info,should,no,yes,from previous MVP
+SEO basics (meta / OG / sitemap) for vardasentertainment.com,seo,should,yes,yes,
+Staff console for requests,ops,should,no,yes,from previous MVP
+Artist / resident pages,artists,could,yes,partial,intro form on /work-with-us; no public artist profiles
+Careers,company,could,yes,yes,
+Amharic language toggle,i18n,could,no,no,
+Event countdown,events,could,yes,no,
+Reduced-motion friendly hero,accessibility,could,no,yes,
+Ticketing checkout,tickets,could,yes,skip,needs payment rail decision (Chapa / Telebirr)
+Resort / hotel integration,partners,skip,yes,skip,LIV-specific partnership
+LIV artist catalogue and media,content,skip,yes,skip,licensed content owned by LIV
+LIV brand / copy / imagery,brand,skip,yes,skip,never reused — Vardas assets only
