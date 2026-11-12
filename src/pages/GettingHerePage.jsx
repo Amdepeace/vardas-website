@@ -37,7 +37,7 @@ export function GettingHerePage() {
           </div>
         </div>
         <div className="mt-20">
-          <Heading title="In the" accent="building" intro="Neighbours in the Getu Commercial Center — handy if you're early." />
+          <Heading center={false} title="In the" accent="building" intro="Neighbours in the Getu Commercial Center — handy if you're early." />
           <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {building.map((p) => <li key={p.id} className="bg-ink-2 border border-line-dark p-6"><p className="text-paper">{p.name}</p><p className="vx-label !text-[0.55rem] text-grey-2 mt-2">{p.category}</p></li>)}
           </ul>

@@ -28,7 +28,7 @@ export function ContactPage({ onToast }) {
             {[VENUES.vardas, VENUES.venue].map((v) => <div key={v.id}><p className="vx-display text-lg accent-text">{v.name}</p><p className="text-sm text-grey-4 mt-3 leading-relaxed">{v.address}</p></div>)}
           </div>
           <div className="lg:col-span-8">
-            <Heading title="Send a" accent="message" className="mb-8" />
+            <Heading center={false} title="Send a" accent="message" className="mb-8" />
             <RequestForm onToast={onToast} cta="Send message →" doneTitle="Message received"
               initial={{ topic: "general", name: "", phone: "", email: "", message: "" }}
               fields={[

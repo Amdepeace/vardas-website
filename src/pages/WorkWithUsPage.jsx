@@ -12,7 +12,7 @@ export function WorkWithUsPage({ onToast }) {
             <p><span className="text-paper">Suppliers</span> — drinks, food, production, security.</p>
           </div>
           <div className="lg:col-span-8">
-            <Heading title="Introduce" accent="yourself" className="mb-8" />
+            <Heading center={false} title="Introduce" accent="yourself" className="mb-8" />
             <RequestForm onToast={onToast} cta="Send →" doneTitle="Thanks — we'll be in touch"
               initial={{ who: "artist", name: "", phone: "", email: "", links: "", message: "" }}
               fields={[

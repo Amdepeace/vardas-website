@@ -1,66 +1,54 @@
 // Vardas Entertainment UI kit (dark + gold).
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function Label({ children, className = "" }) {
-  return <p className={`vx-label text-red flex items-center gap-3 ${className}`}><span className="w-8 h-px bg-red/70" />{children}</p>;
+  return <p className={`vx-label text-grey-4 ${className}`}>{children}</p>;
 }
 
-export function Heading({ label, title, accent, intro, center = false, className = "", as: H = "h2", size = "md" }) {
-  const sz = size === "lg" ? "text-[2.2rem] sm:text-[3.2rem] md:text-[4rem]" : "text-[1.8rem] sm:text-[2.4rem] md:text-[3rem]";
+export function Heading({ label, title, accent, intro, center = true, className = "", as: H = "h2", size = "md" }) {
+  const sz = size === "lg" ? "text-[1.9rem] sm:text-[2.6rem]" : "text-[1.5rem] sm:text-[2rem]";
   return (
     <div className={`${center ? "text-center mx-auto" : ""} max-w-3xl ${className}`}>
-      {label && <Label className={center ? "justify-center" : ""}>{label}</Label>}
-      <H className={`vx-display ${sz} text-paper mt-4 text-balance`}>{title}{accent && <> <span className="accent-text">{accent}</span></>}</H>
-      {intro && <p className={`mt-5 text-[0.95rem] leading-[1.85] text-grey-4 max-w-xl ${center ? "mx-auto" : ""}`}>{intro}</p>}
+      {label && <Label>{label}</Label>}
+      <H className={`vx-display ${sz} text-paper ${label ? "mt-3" : ""} text-balance`}>{title}{accent && <> {accent}</>}</H>
+      {intro && <p className={`mt-5 text-[0.86rem] leading-[1.9] text-grey-4 max-w-2xl ${center ? "mx-auto" : ""}`}>{intro}</p>}
     </div>
   );
 }
 
 const BTN = {
-  gold: "cta-fill text-ink hover:brightness-110",
-  outline: "border border-red/70 text-red hover:bg-red hover:text-ink",
-  ghost: "border border-paper/30 text-paper hover:border-paper hover:bg-paper hover:text-ink",
-  dark: "bg-ink-3 text-paper border border-line-dark hover:border-red",
+  gold: "cta-fill",
+  outline: "border border-paper text-paper hover:bg-paper hover:text-ink",
+  ghost: "border border-white/40 text-paper hover:border-paper hover:bg-paper hover:text-ink",
+  dark: "bg-ink-3 text-paper border border-line-dark hover:border-paper",
 };
 export function Button({ to, href, onClick, children, variant = "gold", className = "", type = "button", disabled, target }) {
-  const cls = `vx-focus inline-flex items-center justify-center gap-2 vx-label !tracking-[0.24em] px-7 py-[0.95rem] transition-all duration-200 disabled:opacity-50 ${BTN[variant]} ${className}`;
+  const cls = `vx-focus inline-flex items-center justify-center gap-2 vx-label px-7 py-[0.85rem] transition-all duration-200 disabled:opacity-50 ${BTN[variant]} ${className}`;
   if (to) return <Link to={to} className={cls}>{children}</Link>;
   if (href) return <a href={href} className={cls} target={target} rel={target ? "noopener noreferrer" : undefined}>{children}</a>;
   return <button type={type} onClick={onClick} disabled={disabled} className={cls}>{children}</button>;
 }
 
 export function Section({ children, className = "", id, tone = "night" }) {
-  const bg = { night: "bg-ink", raised: "bg-ink-2" }[tone];
-  return <section id={id} className={`${bg} px-5 sm:px-8 lg:px-14 py-20 md:py-28 ${className}`}><div className="max-w-[1320px] mx-auto">{children}</div></section>;
+  return <section id={id} className={`${tone === "raised" ? "bg-ink-2" : "vx-bg"} px-5 sm:px-8 lg:px-10 py-16 md:py-24 ${className}`}><div className="max-w-[1320px] mx-auto">{children}</div></section>;
 }
 
-/** Full-bleed cinematic hero: video (poster first), dark gradient, centred or left content. */
-export function VideoHero({ video = "/media/vardas-hero.mp4", videoMobile = "/media/vardas-hero-480.mp4", poster = "/media/vardas-hero-poster.jpg", image, children, height = "full", align = "center", label = "Hero" }) {
+/** Full-width hero film directly under the nav, with a floating round CTA (top right) and optional content. */
+export function VideoHero({ video = "/media/vardas-hero.mp4", videoMobile = "/media/vardas-hero-480.mp4", poster = "/media/vardas-hero-poster.jpg", image, children, orb = { to: "/vardas/tables", text: ["Tables &", "RSVP"] }, label = "Hero" }) {
   const ref = useRef(null);
   const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const el = ref.current; if (!el || mq.matches) return;
-    el.play?.().catch(() => {});
-  }, []);
-  const h = height === "full" ? "min-h-[100svh]" : "min-h-[72svh]";
+  useEffect(() => { const mq = window.matchMedia("(prefers-reduced-motion: reduce)"); setReduced(mq.matches); if (!mq.matches) ref.current?.play?.().catch(() => {}); }, []);
   return (
-    <section aria-label={label} className={`relative ${h} overflow-hidden bg-ink flex ${align === "center" ? "items-center justify-center text-center" : "items-end"} vx-grain`}>
-      {image || reduced ? (
-        <img src={image || poster} alt="" className="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
-      ) : (
+    <section aria-label={label} className="relative mt-[72px] h-[calc(100svh-72px)] min-h-[420px] overflow-hidden bg-ink">
+      {image || reduced ? <img src={image || poster} alt="" className="absolute inset-0 w-full h-full object-cover" fetchpriority="high" /> : (
         <video ref={ref} className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" poster={poster} aria-hidden="true">
-          <source src={videoMobile} type="video/mp4" media="(max-width: 767px)" />
-          <source src={video} type="video/mp4" />
+          <source src={videoMobile} type="video/mp4" media="(max-width: 767px)" /><source src={video} type="video/mp4" />
         </video>
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/35 to-ink" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(7,6,5,.75)_100%)]" />
-      <div className={`relative z-10 w-full px-5 sm:px-8 lg:px-14 ${align === "center" ? "py-32" : "pb-16 md:pb-24 pt-40"}`}>
-        <div className={`max-w-[1320px] mx-auto ${align === "center" ? "flex flex-col items-center" : ""}`}>{children}</div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/20" />
+      {orb && <Link to={orb.to} className="vx-orb absolute top-6 right-6 sm:top-8 sm:right-10 z-10"><span>{orb.text[0]}<br />{orb.text[1]}</span></Link>}
+      {children && <div className="absolute inset-x-0 bottom-0 z-10 px-6 lg:px-10 pb-10 sm:pb-14">{children}</div>}
     </section>
   );
 }
@@ -86,25 +74,18 @@ export function Toast({ message, onDone }) {
   );
 }
 
-export function EventCard({ e, compact = false }) {
+/** Poster card: the artwork is the card; date strip and title sit underneath. */
+export function EventCard({ e }) {
   const d = e.date;
   return (
-    <Link to={`/vardas/events/${e.slug}`} className="group block vx-focus bg-ink-2 border border-line-dark hover:border-red/60 transition-colors">
-      <div className={`relative overflow-hidden ${compact ? "aspect-[4/3]" : "aspect-[16/10]"}`}>
-        <img src={e.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-        <div className="absolute top-4 left-4 bg-ink/80 backdrop-blur px-3 py-2 text-center border border-red/40">
-          <div className="vx-label !text-[0.55rem] text-red">{d.toLocaleDateString("en-GB", { weekday: "short" })}</div>
-          <div className="vx-display text-2xl text-paper leading-none mt-1">{d.getDate()}</div>
-          <div className="vx-label !text-[0.55rem] text-grey-4 mt-1">{d.toLocaleDateString("en-GB", { month: "short" })}</div>
-        </div>
+    <Link to={`/vardas/events/${e.slug}`} className="group block vx-focus">
+      <div className="relative overflow-hidden aspect-[4/5] bg-ink-3">
+        <img src={e.image} alt={`${e.title} poster`} loading="lazy" className="vx-card-img absolute inset-0 w-full h-full object-cover object-top" />
+        <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-paper text-ink text-center vx-label py-3">Tables & RSVP</div>
       </div>
-      <div className="p-5">
-        <p className="vx-label !text-[0.58rem] text-red">{e.kind} · {e.time}</p>
-        <h3 className="vx-display text-xl text-paper mt-2 group-hover:text-red-soft transition-colors">{e.title}</h3>
-        <p className="text-sm text-grey-4 mt-2">{e.lineup.join(" · ")}</p>
-        <p className="vx-label !text-[0.58rem] text-grey-2 mt-4">{e.cover === null ? "Cover announced weekly" : e.cover === 0 ? "No cover" : `Cover ETB ${e.cover}`}</p>
-      </div>
+      <p className="vx-label text-grey-4 mt-4">{d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })}</p>
+      <h3 className="vx-display text-lg text-paper mt-1">{e.title}</h3>
+      <p className="text-[0.76rem] text-grey-4 mt-1 line-clamp-1">{e.lineup.join(" · ")}</p>
     </Link>
   );
 }
@@ -140,8 +121,8 @@ export function Accordion({ items }) {
       {items.map(([q, a], i) => (
         <li key={q} className="border-b border-line-dark">
           <button className="vx-focus w-full flex items-center justify-between gap-6 py-6 text-left" aria-expanded={open === i} onClick={() => setOpen(open === i ? -1 : i)}>
-            <span className="text-paper text-[1.02rem] font-medium">{q}</span>
-            <span className={`text-red text-2xl leading-none transition-transform ${open === i ? "rotate-45" : ""}`}>+</span>
+            <span className="vx-label !text-[0.82rem]">{q}</span>
+            <span className={`text-paper text-3xl font-light leading-none transition-transform ${open === i ? "rotate-45" : ""}`}>+</span>
           </button>
           <div className={`grid transition-all duration-300 ${open === i ? "grid-rows-[1fr] pb-6" : "grid-rows-[0fr]"}`}><p className="overflow-hidden text-grey-4 leading-[1.85] max-w-2xl">{a}</p></div>
         </li>
@@ -150,18 +131,23 @@ export function Accordion({ items }) {
   );
 }
 
+/** Page banner: a short image strip under the nav with the page title centred on it. */
 export function PageHero({ label, title, accent, intro, image = "/media/vardas-hero-poster.jpg", children }) {
   return (
-    <section className="relative min-h-[62svh] flex items-end overflow-hidden bg-ink vx-grain">
-      <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" />
-      <div className="relative z-10 w-full px-5 sm:px-8 lg:px-14 pb-14 md:pb-20 pt-40">
-        <div className="max-w-[1320px] mx-auto">
-          <Heading as="h1" size="lg" label={label} title={title} accent={accent} intro={intro} />
-          {children && <div className="mt-9 flex flex-wrap gap-3">{children}</div>}
+    <Fragment>
+      <section className="relative mt-[72px] h-[150px] sm:h-[190px] flex items-center justify-center overflow-hidden bg-ink">
+        <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-ink/55" />
+        <h1 className="relative vx-display text-[1.7rem] sm:text-[2.4rem] text-paper text-center px-4">{title}{accent && <> {accent}</>}</h1>
+      </section>
+      {(intro || children) && (
+        <div className="vx-bg px-6 pt-12 text-center">
+          {label && <Label>{label}</Label>}
+          {intro && <p className="max-w-2xl mx-auto text-[0.86rem] leading-[1.9] text-grey-4 mt-3">{intro}</p>}
+          {children && <div className="mt-7 flex flex-wrap justify-center gap-3">{children}</div>}
         </div>
-      </div>
-    </section>
+      )}
+    </Fragment>
   );
 }
 

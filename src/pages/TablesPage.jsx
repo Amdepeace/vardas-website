@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Heading, Label, PageHero, Section } from "../components/vx";
+import { Button, Heading, Label, PageHero, Section } from "../components/vx";
 import { RequestForm } from "../components/RequestForm";
 import { TABLE_ZONES } from "../data/site";
 
@@ -8,7 +8,7 @@ export function TablesPage({ onToast }) {
   const today = new Date().toISOString().slice(0, 10);
   return (
     <div>
-      <PageHero image="/gallery/vardas-night-23.jpg" label="Vardas · VIP tables" title="Request a" accent="table" intro="Pick the night, the zone and your party size. A host confirms by phone with any minimum spend and your arrival time — nothing is charged online." />
+      <PageHero title="Table reservations" image="/gallery/vardas-night-23.jpg" intro="Planning a night out? Pick the night, the zone and your party size — a host confirms by phone. Nothing is charged online."><Button to="/vardas" variant="outline">Virtual tour</Button><Button to="/vardas/events" variant="outline">Browse upcoming events</Button></PageHero>
       <Section>
         <div className="grid lg:grid-cols-12 gap-14">
           <div className="lg:col-span-5">
@@ -24,7 +24,7 @@ export function TablesPage({ onToast }) {
             <p className="text-xs text-grey-2 mt-6 leading-relaxed">Bottle service is only ever on request, and its price is on the menu. Valid ID required.</p>
           </div>
           <div className="lg:col-span-7">
-            <Heading title="Your" accent="night" className="mb-8" />
+            <Heading center={false} title="Your" accent="night" className="mb-8" />
             <RequestForm onToast={onToast} cta="Request table →" doneTitle="Table request received"
               initial={{ date: today, time: "22:30", zone: "club-floor", party: 6, name: "", phone: "", email: "", ride: false, notes: q.get("event") ? `For ${q.get("event").replace(/-/g, " ")}` : "" }}
               fields={[

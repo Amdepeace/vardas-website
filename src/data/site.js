@@ -11,6 +11,8 @@ export const SITE = {
   whatsapp: "251911522856",
   telegram: "+251911522856",
   city: "Addis Ababa, Ethiopia",
+  // RSVP lines printed on every Vardas poster.
+  rsvp: [["+251948665620", "+251 948 66 56 20"], ["+251911771480", "+251 911 77 14 80"]],
 };
 
 export const VENUES = {
@@ -31,7 +33,7 @@ export const VENUES = {
     kind: "Premium event space",
     path: "/venue",
     tagline: "Corporate events, private parties, concerts, shows and weddings.",
-    address: "Addis Ababa — location shared with your event plan",
+    address: "Welo Sefer, Addis Ababa — the former Kana Studio",
     offerings: [
       ["Premium Event Space", "A full-production room for the nights that have to be remembered."],
       ["Corporate Events", "Launches, galas, award nights and end-of-year parties, run to your brief."],
@@ -45,24 +47,24 @@ export const VENUES = {
   },
 };
 
-// Dropdowns in the top nav, one per venue (the multi-location pattern).
-export const NAV = [
-  { label: "Vardas", base: "/vardas", items: [
-    ["Overview", "/vardas"], ["Upcoming events", "/vardas/events"], ["VIP tables", "/vardas/tables"],
-    ["Menu & prices", "/vardas/menu"], ["Getting here", "/vardas/getting-here"], ["Your terms", "/vardas/your-terms"], ["FAQ", "/vardas/faq"],
-  ] },
-  { label: "Vardas Venue", base: "/venue", items: [
-    ["Overview", "/venue"], ["Corporate events", "/venue/enquire?type=corporate"], ["Private parties", "/venue/enquire?type=private"],
-    ["Concerts & shows", "/venue/enquire?type=concert"], ["Weddings & celebrations", "/venue/enquire?type=wedding"], ["Plan your event", "/venue/enquire"],
-  ] },
+// Top nav, LIV-style: logo · venue switcher pill · centred links (Events has a dropdown).
+export const NAV_LINKS = [
+  { label: "Events", to: "/vardas/events", items: [["Upcoming events", "/vardas/events"], ["Aura Thursday", "/vardas/events/aura-thursday"], ["Afro Verse Friday", "/vardas/events/afro-verse"], ["Frenzy Saturday", "/vardas/events/frenzy-saturday"], ["The Sunday Jam", "/vardas/events/sunday-jam"]] },
+  { label: "Venue", to: "/vardas" },
+  { label: "Corporate", to: "/venue" },
+  { label: "Menu", to: "/vardas/menu" },
+  { label: "Reserve", to: "/vardas/tables" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "FAQs", to: "/vardas/faq" },
 ];
-export const NAV_FLAT = [["Gallery", "/gallery"], ["Contact", "/contact"]];
+export const SWITCHER = [["Vardas", "Lounge & club · Bole", "/vardas"], ["Vardas Venue", "Event space · Welo Sefer", "/venue"]];
 
-// Starter programme, shown until published events exist in Supabase.
+// Weekly programme from the Vardas posters; published Supabase events replace it.
 export const STARTER_EVENTS = [
-  { slug: "live-thursdays", title: "Live Thursdays", kind: "Live music", weekday: 4, time: "21:00", lineup: ["Ethio-jazz & soul sets"], cover: 0, dress: "Smart casual", image: "/gallery/vardas-night-3.jpg" },
-  { slug: "fifth-floor-fridays", title: "Fifth Floor Fridays", kind: "Club night", weekday: 5, time: "22:00", lineup: ["Resident DJs", "Afrobeats · amapiano · house"], cover: null, dress: "Smart · no sportswear", image: "/gallery/vardas-night-13.jpg" },
-  { slug: "saturday-sessions", title: "Saturday Sessions", kind: "Club night", weekday: 6, time: "22:00", lineup: ["Guest DJ — announced weekly"], cover: null, dress: "Smart", image: "/gallery/vardas-night-18.jpg" },
+  { slug: "aura-thursday", title: "Aura Thursday", kind: "Live & DJs", weekday: 4, time: "21:00", lineup: ["Titem", "Eyu", "Teddy", "Sol Romeyo", "Henok"], cover: null, dress: "Smart", image: "/events/aura-thursday.jpg" },
+  { slug: "afro-verse", title: "Afro Verse", kind: "Afro night", weekday: 5, time: "22:00", lineup: ["Donat", "JJ Kassa", "Gerum", "Sayimne", "Bini", "Sol Romeyo", "Henok"], cover: null, dress: "Smart", image: "/events/afro-verse.jpg" },
+  { slug: "frenzy-saturday", title: "Frenzy Saturday", kind: "Club night", weekday: 6, time: "22:00", lineup: ["Upon", "Titem", "Foxx", "Henok", "Leul", "Sol Romeyo"], cover: null, dress: "Smart", image: "/events/frenzy-saturday.jpg" },
+  { slug: "sunday-jam", title: "The Sunday Jam", kind: "Live band", weekday: 0, time: "20:00", lineup: ["Abdu Kiar", "Jhonny", "Jojo"], cover: null, dress: "Smart casual", image: "/events/sunday-jam.jpg" },
 ];
 
 // Next date for a weekly starter event, formatted for display.
