@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import PublicApp from "./PublicApp";
 import { AdminGuard } from "./admin/AdminGuard";
@@ -10,10 +10,13 @@ import { EventsAdminPage } from "./admin/pages/EventsAdminPage";
 import { EnquiriesPage } from "./admin/pages/EnquiriesPage";
 import { AdminComingSoon } from "./admin/AdminComingSoon";
 
+// The offline (double-click) build uses hash URLs so it works from file://
+const Router = import.meta.env.VITE_OFFLINE ? HashRouter : BrowserRouter;
+
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
@@ -33,7 +36,7 @@ export default function App() {
           </Route>
           <Route path="/*" element={<PublicApp />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   );
 }
